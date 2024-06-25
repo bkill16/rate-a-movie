@@ -1,0 +1,83 @@
+[
+    {
+        "title":"Star Wars: The Phantom Menace (Episode I)",
+        "director":"George Lucas",
+        "production_company":"Lucasfilm Ltd.",
+        "distribution_company":"20th Century Fox",
+        "US_release_date":"May 19, 1999",
+        "running_time": "137 minutes",
+        "audience_rating": "PG"
+    },
+    {
+        "title":"Star Wars: Attack of the Clones (Episode II)",
+        "director":"George Lucas",
+        "production_company":"Lucasfilm Ltd.",
+        "distribution_company":"20th Century Fox",
+        "US_release_date":"May 16, 2002",
+        "running_time": "143 minutes",
+        "audience_rating": "PG"
+    },
+    {
+        "title":"Star Wars: Revenge of the Sith (Episode III)",
+        "director":"George Lucas",
+        "production_company":"Lucasfilm Ltd.",
+        "distribution_company":"20th Century Fox",
+        "US_release_date":"May 19, 2005",
+        "running_time": "141 minutes",
+        "audience_rating": "PG-13"
+    },
+    {
+        "title":"Star Wars: A New Hope (Episode IV)",
+        "director":"George Lucas",
+        "production_company":"Lucasfilm Ltd.",
+        "distribution_company":"20th Century Fox",
+        "US_release_date":"May 25, 1977",
+        "running_time": "125 minutes",
+        "audience_rating": "PG"
+    },
+    {
+        "title":"Star Wars: The Empire Strikes Back (Episode V)",
+        "director":"Irvin Kershner",
+        "production_company":"Lucasfilm Ltd.",
+        "distribution_company":"20th Century Fox",
+        "US_release_date":"May 21, 1980",
+        "running_time": "128 minutes",
+        "audience_rating": "PG"
+    },
+    {
+        "title":"Star Wars: Return of the Jedi (Episode VI)",
+        "director":"Richard Marquand",
+        "production_company":"Lucasfilm Ltd.",
+        "distribution_company":"20th Century Fox",
+        "US_release_date":"May 25, 1983",
+        "running_time": "136 minutes",
+        "audience_rating": "PG"
+    },
+    {
+        "title":"Star Wars: The Force Awakens (Episode VII)",
+        "director":"J.J. Abrams",
+        "production_company":"Lucasfilm Ltd.",
+        "distribution_company":"Walt Disney Studios Motion Pictures",
+        "US_release_date":"December 18, 2015",
+        "running_time": "141 minutes",
+        "audience_rating": "PG-13"
+    },
+    {
+        "title":"Star Wars: The Last Jedi (Episode VIII)",
+        "director":"Rian Johnson",
+        "production_company":"Lucasfilm Ltd.",
+        "distribution_company":"Walt Disney Studios Motion Pictures",
+        "US_release_date":"December 15, 2017",
+        "running_time": "154 minutes",
+        "audience_rating": "PG-13"
+    },
+    {
+        "title":"Star Wars: The Rise of Skywalker (Episode IX)",
+        "director":"J.J. Abrams",
+        "production_company":"Lucasfilm Ltd.",
+        "distribution_company":"Walt Disney Studios Motion Pictures",
+        "US_release_date":"December 20, 2019",
+        "running_time": "143 minutes",
+        "audience_rating": "PG-13"
+    }
+]
