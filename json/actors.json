@@ -1,0 +1,135 @@
+[
+  {
+    "name": "Liam Neeson",
+    "gender": "Male",
+    "dob": "1952-06-07",
+    "dod": null,
+    "nationality": "Irish"
+  },
+  {
+    "name": "Ewan McGregor",
+    "gender": "Male",
+    "dob": "1971-03-31",
+    "dod": null,
+    "nationality": "Scottish"
+  },
+  {
+    "name": "Natalie Portman",
+    "gender": "Female",
+    "dob": "1981-06-09",
+    "dod": null,
+    "nationality": "American"
+  },
+  {
+    "name": "Jake Lloyd",
+    "gender": "Male",
+    "dob": "1989-03-05",
+    "dod": null,
+    "nationality": "American"
+  },
+  {
+    "name": "Ian McDiarmid",
+    "gender": "Male",
+    "dob": "1944-08-11",
+    "dod": null,
+    "nationality": "Scottish-British"
+  },
+  {
+    "name": "Hayen Christensen",
+    "gender": "Male",
+    "dob": "1981-04-19",
+    "dod": null,
+    "nationality": "Canadian"
+  },
+  {
+    "name": "Christopher Lee",
+    "gender": "Male",
+    "dob": "1922-05-27",
+    "dod": "2015-06-07",
+    "nationality": "British"
+  },
+  {
+    "name": "Samuel L. Jackson",
+    "gender": "Male",
+    "dob": "1948-12-21",
+    "dod": null,
+    "nationality": "American"
+  },
+  {
+    "name": "Mark Hamill",
+    "gender": "Male",
+    "dob": "1951-09-25",
+    "dod": null,
+    "nationality": "American"
+  },
+  {
+    "name": "Harrison Ford",
+    "gender": "Male",
+    "dob": "1942-07-13",
+    "dod": null,
+    "nationality": "American"
+  },
+  {
+    "name": "Carrie Fisher",
+    "gender": "Female",
+    "dob": "1956-10-21",
+    "dod": "2016-12-27",
+    "nationality": "American"
+  },
+  {
+    "name": "Alec Guinness",
+    "gender": "Male",
+    "dob": "1914-04-02",
+    "dod": "2000-08-05",
+    "nationality": "British"
+  },
+  {
+    "name": "Peter Cushing",
+    "gender": "Male",
+    "dob": "1913-05-26",
+    "dod": "1994-08-11",
+    "nationality": "British"
+  },
+  {
+    "name": "Billy Dee Williams",
+    "gender": "Male",
+    "dob": "1937-04-06",
+    "dod": null,
+    "nationality": "American"
+  },
+  {
+    "name": "Frank Oz",
+    "gender": "Male",
+    "dob": "1944-05-25",
+    "dod": null,
+    "nationality": "American"
+  },
+  {
+    "name": "Daisy Ridley",
+    "gender": "Female",
+    "dob": "1992-04-10",
+    "dod": null,
+    "nationality": "British"
+  },
+  {
+    "name": "John Boyega",
+    "gender": "Male",
+    "dob": "1992-03-17",
+    "dod": null,
+    "nationality": "British"
+  },
+  {
+    "name": "Adam Driver",
+    "gender": "Male",
+    "dob": "1983-11-19",
+    "dod": null,
+    "nationality": "American"
+  },
+  {
+    "name": "Oscar Isaac",
+    "gender": "Male",
+    "dob": "1979-03-09",
+    "dod": null,
+    "nationality": "American"
+  }
+]
