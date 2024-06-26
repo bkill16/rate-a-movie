@@ -1,0 +1,156 @@
+[
+    {
+      "title": "Star Wars: The Phantom Menace (Episode I)",
+      "reviews": [
+        {
+          "rating": 4,
+          "review": "The Phantom Menace brings a lot of exciting new elements to the Star Wars universe. The podrace scene is thrilling, and the lightsaber duel with Darth Maul is a standout. However, Jar Jar Binks can be quite annoying."
+        },
+        {
+          "rating": 2,
+          "review": "While the special effects and action sequences are impressive, the story and characters feel underdeveloped. Young Anakin Skywalker doesn't quite fit the role well."
+        },
+        {
+          "rating": 3,
+          "review": "A mixed bag. The visuals are stunning, and it's great to see the Jedi in their prime, but the pacing drags and some characters, like Jar Jar Binks, detract from the overall experience."
+        }
+      ]
+    },
+    {
+      "title": "Star Wars: Attack of the Clones (Episode II)",
+      "reviews": [
+        {
+          "rating": 4,
+          "review": "Attack of the Clones improves on its predecessor with a more engaging plot and exciting action scenes. The romance between Anakin and Padmé is a bit forced, but the film overall is entertaining."
+        },
+        {
+          "rating": 3,
+          "review": "The action and special effects are top-notch, but the dialogue and romantic subplot between Anakin and Padmé are quite awkward. The final battle is a highlight."
+        },
+        {
+          "rating": 2,
+          "review": "Despite some visually stunning moments, the movie is bogged down by poor dialogue and a lack of chemistry between the leads. The plot feels disjointed at times."
+        }
+      ]
+    },
+    {
+      "title": "Star Wars: Revenge of the Sith (Episode III)",
+      "reviews": [
+        {
+          "rating": 5,
+          "review": "Revenge of the Sith is a thrilling and emotional conclusion to the prequel trilogy. The transformation of Anakin to Darth Vader is well-executed, and the action scenes are spectacular."
+        },
+        {
+          "rating": 4,
+          "review": "The darkest and most intense of the prequels. The film does a great job of tying the story to the original trilogy, and the action sequences are some of the best in the series."
+        },
+        {
+          "rating": 3,
+          "review": "An improvement over the previous prequels with a more compelling story and better performances. However, some of the dialogue is still clunky, and the pacing could be better."
+        }
+      ]
+    },
+    {
+      "title": "Star Wars: A New Hope (Episode IV)",
+      "reviews": [
+        {
+          "rating": 5,
+          "review": "A New Hope is a timeless classic that started it all. The characters are iconic, the story is engaging, and the special effects were groundbreaking for their time."
+        },
+        {
+          "rating": 5,
+          "review": "This film revolutionized the sci-fi genre. The chemistry between the characters, particularly Luke, Han, and Leia, is fantastic. A must-watch for any movie fan."
+        },
+        {
+          "rating": 4,
+          "review": "A wonderful adventure that still holds up today. The pacing can be slow at times, but the film's charm and creativity shine through."
+        }
+      ]
+    },
+    {
+      "title": "Star Wars: The Empire Strikes Back (Episode V)",
+      "reviews": [
+        {
+          "rating": 5,
+          "review": "The Empire Strikes Back is arguably the best Star Wars film. The darker tone and deeper character development make it a standout. The reveal about Darth Vader is legendary."
+        },
+        {
+          "rating": 5,
+          "review": "A perfect sequel that expands the universe and develops the characters further. The Hoth battle and the lightsaber duel between Luke and Vader are highlights."
+        },
+        {
+          "rating": 4,
+          "review": "An excellent follow-up to A New Hope with a more mature storyline and fantastic action scenes. The cliffhanger ending is both frustrating and brilliant."
+        }
+      ]
+    },
+    {
+      "title": "Star Wars: Return of the Jedi (Episode VI)",
+      "reviews": [
+        {
+          "rating": 4,
+          "review": "Return of the Jedi brings the original trilogy to a satisfying conclusion. The final battle is epic, and the redemption of Darth Vader is emotional. The Ewoks are a bit silly, though."
+        },
+        {
+          "rating": 4,
+          "review": "A great end to the original trilogy. The action is thrilling, and the story wraps up nicely. Some of the scenes with the Ewoks can be a bit cheesy, but it's still a fantastic film."
+        },
+        {
+          "rating": 3,
+          "review": "While it's a fitting end to the trilogy, Return of the Jedi feels a bit uneven. The action sequences are great, but some parts, particularly the Ewok scenes, feel out of place."
+        }
+      ]
+    },
+    {
+      "title": "Star Wars: The Force Awakens (Episode VII)",
+      "reviews": [
+        {
+          "rating": 4,
+          "review": "The Force Awakens successfully revives the Star Wars franchise with new and old characters. Rey, Finn, and Kylo Ren are interesting additions, and the film's energy is infectious."
+        },
+        {
+          "rating": 5,
+          "review": "A fantastic return to the Star Wars universe. The new characters are compelling, and the film balances nostalgia with fresh storytelling. Kylo Ren is a standout villain."
+        },
+        {
+          "rating": 3,
+          "review": "While it's exciting to see Star Wars back on the big screen, The Force Awakens relies too much on rehashing old plots. The new characters have potential, though."
+        }
+      ]
+    },
+    {
+      "title": "Star Wars: The Last Jedi (Episode VIII)",
+      "reviews": [
+        {
+          "rating": 4,
+          "review": "The Last Jedi takes bold risks and subverts expectations. Some choices are controversial, but the film is visually stunning and emotionally resonant. Luke's arc is particularly powerful."
+        },
+        {
+          "rating": 2,
+          "review": "A divisive entry in the saga. While it's visually impressive, some of the story decisions feel out of place and don't align with the established lore. The humor can be jarring."
+        },
+        {
+          "rating": 3,
+          "review": "The Last Jedi has moments of brilliance and moments of frustration. It tries to do something different, which is commendable, but not all of it works. The performances are strong, though."
+        }
+      ]
+    },
+    {
+      "title": "Star Wars: The Rise of Skywalker (Episode IX)",
+      "reviews": [
+        {
+          "rating": 3,
+          "review": "The Rise of Skywalker is a mixed bag. It offers exciting action and a sense of closure, but the story feels rushed and some plot points are confusing. The return of Palpatine is controversial."
+        },
+        {
+          "rating": 4,
+          "review": "A fitting end to the saga with plenty of fan service. The action sequences are great, and the film ties up many loose ends. However, it feels a bit overstuffed at times."
+        },
+        {
+          "rating": 2,
+          "review": "Disappointing conclusion to the trilogy. The plot is convoluted, and the pacing is uneven. It tries to do too much in too little time, resulting in a jumbled story."
+        }
+      ]
+    }
+  ]
+  
