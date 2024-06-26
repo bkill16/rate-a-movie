@@ -15,7 +15,7 @@ async function getActorById(req, res) {
     const actor = await Actor.findById(actorId);
 
     if (!actor) {
-      return res.status(404).json({ message: "Actor not found " });
+      return res.status(404).json({ message: "Actor not found" });
     }
 
     res.status(200).json(actor);
@@ -30,7 +30,7 @@ async function getActorByName(req, res) {
     const actor = await Actor.find({ name: new RegExp(actorName, "i") });
 
     if (!actor) {
-      return res.status(404).json({ message: "Actor not found " });
+      return res.status(404).json({ message: "Actor not found" });
     }
 
     res.status(200).json(actor);
@@ -41,8 +41,32 @@ async function getActorByName(req, res) {
 
 // getActorByMovie
 
+async function createActor(req, res) {
+  const { name, gender, dob, dod, nationality } = req.body;
+
+  try {
+    const newActor = new Actor({
+      name,
+      gender,
+      dob: new Date(dob),
+      dod: dod ? new Date(dod) : null,
+      nationality,
+    });
+
+    const savedActor = await newActor.save();
+    res.status(201).json({ message: "Actor created successfully", savedActor });
+  } catch (err) {
+    res.status(400).json({ message: `Error creating actor: ${err.message}` });
+  }
+}
+
+// updateActor
+
+// deleteActor
+
 module.exports = {
   getAllActors,
   getActorById,
-  getActorByName
+  getActorByName,
+  createActor,
 };

@@ -1,14 +1,13 @@
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
 
-const ActorSchema = new Schema ({
+const actorSchema = new mongoose.Schema ({
     name: String,
     gender: String,
-    dob: String,
-    dod: String,
+    dob: Date,
+    dod: Date,
     nationality: String
-})
+}, { versionKey: false});
 
-const Actor = mongoose.model("Actor", ActorSchema);
+const Actor = mongoose.model("Actor", actorSchema);
 
 module.exports = Actor;
