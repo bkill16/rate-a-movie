@@ -23,3 +23,18 @@ Content-Type: application/json
     "dod": null,
     "nationality": "American"
 }
+
+### updateActor
+PUT http://localhost:8080/actors/667ca158f9d47499c57b925e HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "National Treasure",
+    "gender": "Male",
+    "dob": "1964-01-07",
+    "dod": null,
+    "nationality": "American"
+}
+
+### deleteActor
+DELETE http://localhost:8080/actors/667dc6edccd7fb12549b1654 HTTP/1.1

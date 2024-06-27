@@ -60,13 +60,49 @@ async function createActor(req, res) {
   }
 }
 
-// updateActor
+async function updateActor(req, res) {
+  try {
+    const actorId = req.params.id;
+    const updateData = req.body;
 
-// deleteActor
+    const actor = await Actor.findById(actorId);
+    if (!actor) {
+      return res.status(404).json({ message: "Actor not found" });
+    }
+
+    const updatedActor = await Actor.findByIdAndUpdate(actorId, updateData, {
+      new: true,
+    });
+
+    res
+      .status(200)
+      .json({ message: "Actor updated successfully", updatedActor });
+  } catch (err) {
+    res.status(500).json({ message: `Error updating actor: ${err.message}` });
+  }
+}
+
+async function deleteActor(req, res) {
+  try {
+    const actorId = req.params.id;
+
+    const actor = await Actor.findById(actorId);
+    if (!actor) {
+      return res.status(404).json({ message: "Actor not found" });
+    }
+
+    const deletedActor = await Actor.findByIdAndDelete(actorId);
+    res.status(204).json({ message: "Actor deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ message: `Error deleting actor: ${err.message}` });
+  }
+}
 
 module.exports = {
   getAllActors,
   getActorById,
   getActorByName,
   createActor,
+  updateActor,
+  deleteActor
 };
