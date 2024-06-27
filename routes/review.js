@@ -8,7 +8,7 @@ router.get('/', reviewsController.getAllReviews);
 
 // Route to get a single review by review ID
 // http://localhost:8080/reviews/reviewId
-router.get('/review/:reviewId', reviewsController.getSingleReviews);
+router.get('/review/:reviewId', reviewsController.getSingleReview);
 
 // Route to get reviews by user ID
 // http://localhost:8080/reviews/user/userId
