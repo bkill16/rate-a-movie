@@ -1,0 +1,27 @@
+// localhost
+
+### getAllRelationships
+GET http://localhost:8080/movie-actors HTTP/1.1
+
+### createRelationship
+POST http://localhost:8080/movie-actors HTTP/1.1
+Content-Type: application/json
+
+{
+    "movieId": "667b1de0f592b5c99c067fc3",
+    "actorId": "667ca138ea8a0e7bbff67a0a",
+    "role": "Joe"
+}
+
+### updateRelationship
+PUT http://localhost:8080/movie-actors/667e3febcba6698e8652d85b HTTP/1.1
+Content-Type: application/json
+
+{
+    "movieId": "667b1de0f592b5c99c067fc3",
+    "actorId": "667ca138ea8a0e7bbff67a0a",
+    "role": "Joe Mama"
+}
+
+### deleteRelationship
+DELETE http://localhost:8080/movie-actors/667e3febcba6698e8652d85b HTTP/1.1

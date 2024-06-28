@@ -9,8 +9,7 @@ GET http://localhost:8080/actors/667c895d4f0e4e74a12a8e11 HTTP/1.1
 ### getActorByName
 GET http://localhost:8080/actors/name/liam%20neeson HTTP/1.1
 
-### getActorByMovie
-
+### getActorByMovieTitle
 
 ### createActor
 POST http://localhost:8080/actors HTTP/1.1

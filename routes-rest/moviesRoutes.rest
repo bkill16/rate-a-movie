@@ -1,0 +1,42 @@
+// localhost
+
+### getAllMovies
+GET http://localhost:8080/movies HTTP/1.1
+
+### getSingleMovie
+GET http://localhost:8080/movies/667b1de0f592b5c99c067fc3 HTTP/1.1
+
+### getMovieByTitle
+
+### getMovieByActorName
+
+### createMovie
+POST http://localhost:8080/movies HTTP/1.1
+Content-Type: application/json
+
+{
+    "title": "Cool Movie",
+    "director": "Cool release date",
+    "production_company": "Cool production company",
+    "distribution_company": "Cool distribution company",
+    "US_release_date": "1999-05-19T06:00:00.000Z",
+    "running_time": "999",
+    "audience_rating": "G"
+}
+
+### updateMovie
+PUT http://localhost:8080/movies/667e3bf3fd21eb55a3819ef1 HTTP/1.1
+Content-Type: application/json
+
+{
+    "title": "Awesome Movie",
+    "director": "Cool release date",
+    "production_company": "Cool production company",
+    "distribution_company": "Cool distribution company",
+    "US_release_date": "1999-05-19T06:00:00.000Z",
+    "running_time": "999",
+    "audience_rating": "PG"
+}
+
+### deleteMovie
+DELETE http://localhost:8080/movies/667e3bf3fd21eb55a3819ef1 HTTP/1.1

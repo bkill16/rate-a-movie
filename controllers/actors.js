@@ -1,4 +1,6 @@
 const Actor = require("../models/Actor");
+const Movie = require("../models/Movie");
+const MovieActor = require("../models/MovieActor");
 
 async function getAllActors(req, res) {
   try {
@@ -39,7 +41,7 @@ async function getActorByName(req, res) {
   }
 }
 
-// getActorByMovie
+// getActorsByMovieTitle
 
 async function createActor(req, res) {
   const { name, gender, dob, dod, nationality } = req.body;
@@ -102,7 +104,8 @@ module.exports = {
   getAllActors,
   getActorById,
   getActorByName,
+  // getActorsByMovieTitle,
   createActor,
   updateActor,
-  deleteActor
+  deleteActor,
 };
