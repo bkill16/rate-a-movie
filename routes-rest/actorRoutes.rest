@@ -4,7 +4,7 @@
 GET http://localhost:8080/actors
 
 ### getActorById
-GET http://localhost:8080/actors/667c895d4f0e4e74a12a8e11
+GET http://localhost:8080/actors/667ca138ea8a0e7bbff67a0a
 
 ### getActorByName
 GET http://localhost:8080/actors/name/liam%20neeson
@@ -25,7 +25,7 @@ Content-Type: application/json
 }
 
 ### updateActor
-PUT http://localhost:8080/actors/667ca158f9d47499c57b925e
+PUT http://localhost:8080/actors/667ee11a8cd426baf8fabdd6
 Content-Type: application/json
 
 {
@@ -37,7 +37,7 @@ Content-Type: application/json
 }
 
 ### deleteActor
-DELETE http://localhost:8080/actors/667dc6edccd7fb12549b1654
+DELETE http://localhost:8080/actors/667ee11a8cd426baf8fabdd6
 
 // render
 

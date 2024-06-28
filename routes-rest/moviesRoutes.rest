@@ -30,7 +30,7 @@ Content-Type: application/json
 }
 
 ### updateMovie
-PUT http://localhost:8080/movies/667e3bf3fd21eb55a3819ef1 
+PUT http://localhost:8080/movies/667ee16e8cd426baf8fabde4
 Content-Type: application/json
 
 {
@@ -44,7 +44,7 @@ Content-Type: application/json
 }
 
 ### deleteMovie
-DELETE http://localhost:8080/movies/667e3bf3fd21eb55a3819ef1 
+DELETE http://localhost:8080/movies/667ee16e8cd426baf8fabde4
 
 // render
 

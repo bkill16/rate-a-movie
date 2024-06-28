@@ -14,7 +14,7 @@ Content-Type: application/json
 }
 
 ### updateRelationship
-PUT http://localhost:8080/movie-actors/667e3febcba6698e8652d85b
+PUT http://localhost:8080/movie-actors/667ee1bf8cd426baf8fabded
 Content-Type: application/json
 
 {
@@ -24,7 +24,7 @@ Content-Type: application/json
 }
 
 ### deleteRelationship
-DELETE http://localhost:8080/movie-actors/667e3febcba6698e8652d85b
+DELETE http://localhost:8080/movie-actors/667ee1bf8cd426baf8fabded
 
 // render
 

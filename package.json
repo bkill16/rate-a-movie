@@ -5,7 +5,6 @@
   "scripts": {
     "start": "nodemon server.js",
     "swagger-autogen": "node swagger-generate.js"
-
   },
   "keywords": [],
   "author": "",

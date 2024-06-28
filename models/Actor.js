@@ -16,7 +16,7 @@ const actorSchema = new mongoose.Schema(
     },
     dod: {
       type: Date,
-      required: true,
+      required: false,
     },
     nationality: {
       type: String,
