@@ -1,19 +1,19 @@
 // localhost
 
 ### getAllActors
-GET http://localhost:8080/actors HTTP/1.1
+GET http://localhost:8080/actors
 
 ### getActorById
-GET http://localhost:8080/actors/667c895d4f0e4e74a12a8e11 HTTP/1.1
+GET http://localhost:8080/actors/667c895d4f0e4e74a12a8e11
 
 ### getActorByName
-GET http://localhost:8080/actors/name/liam%20neeson HTTP/1.1
+GET http://localhost:8080/actors/name/liam%20neeson
 
 ### getCastByMovieTitle
-GET http://localhost:8080/actors/movie/revenge%20of%20the%20sith HTTP/1.1
+GET http://localhost:8080/actors/movie/revenge%20of%20the%20sith
 
 ### createActor
-POST http://localhost:8080/actors HTTP/1.1
+POST http://localhost:8080/actors
 Content-Type: application/json
 
 {
@@ -25,7 +25,7 @@ Content-Type: application/json
 }
 
 ### updateActor
-PUT http://localhost:8080/actors/667ca158f9d47499c57b925e HTTP/1.1
+PUT http://localhost:8080/actors/667ca158f9d47499c57b925e
 Content-Type: application/json
 
 {
@@ -37,4 +37,45 @@ Content-Type: application/json
 }
 
 ### deleteActor
-DELETE http://localhost:8080/actors/667dc6edccd7fb12549b1654 HTTP/1.1
+DELETE http://localhost:8080/actors/667dc6edccd7fb12549b1654
+
+// render
+
+### getAllActors
+GET https://rate-a-movie.onrender.com/actors
+
+### getActorById
+GET https://rate-a-movie.onrender.com/actors/667c895d4f0e4e74a12a8e11
+
+### getActorByName
+GET https://rate-a-movie.onrender.com/actors/name/liam%20neeson
+
+### getCastByMovieTitle
+GET https://rate-a-movie.onrender.com/actors/movie/revenge%20of%20the%20sith
+
+### createActor
+POST https://rate-a-movie.onrender.com/actors
+Content-Type: application/json
+
+{
+    "name": "Nicolas Cage",
+    "gender": "Male",
+    "dob": "1964-01-07",
+    "dod": null,
+    "nationality": "American"
+}
+
+### updateActor
+PUT https://rate-a-movie.onrender.com/actors/667ca158f9d47499c57b925e
+Content-Type: application/json
+
+{
+    "name": "National Treasure",
+    "gender": "Male",
+    "dob": "1964-01-07",
+    "dod": null,
+    "nationality": "American"
+}
+
+### deleteActor
+DELETE https://rate-a-movie.onrender.com/actors/667dc6edccd7fb12549b1654

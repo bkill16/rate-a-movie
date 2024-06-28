@@ -1,10 +1,10 @@
 // localhost
 
 ### getAllRelationships
-GET http://localhost:8080/movie-actors HTTP/1.1
+GET http://localhost:8080/movie-actors
 
 ### createRelationship
-POST http://localhost:8080/movie-actors HTTP/1.1
+POST http://localhost:8080/movie-actors
 Content-Type: application/json
 
 {
@@ -14,7 +14,7 @@ Content-Type: application/json
 }
 
 ### updateRelationship
-PUT http://localhost:8080/movie-actors/667e3febcba6698e8652d85b HTTP/1.1
+PUT http://localhost:8080/movie-actors/667e3febcba6698e8652d85b
 Content-Type: application/json
 
 {
@@ -24,4 +24,32 @@ Content-Type: application/json
 }
 
 ### deleteRelationship
-DELETE http://localhost:8080/movie-actors/667e3febcba6698e8652d85b HTTP/1.1
+DELETE http://localhost:8080/movie-actors/667e3febcba6698e8652d85b
+
+// render
+
+### getAllRelationships
+GET https://rate-a-movie.onrender.com/movie-actors
+
+### createRelationship
+POST https://rate-a-movie.onrender.com/movie-actors
+Content-Type: application/json
+
+{
+    "movieId": "667b1de0f592b5c99c067fc3",
+    "actorId": "667ca138ea8a0e7bbff67a0a",
+    "role": "Joe"
+}
+
+### updateRelationship
+PUT https://rate-a-movie.onrender.com/movie-actors/667e3febcba6698e8652d85b
+Content-Type: application/json
+
+{
+    "movieId": "667b1de0f592b5c99c067fc3",
+    "actorId": "667ca138ea8a0e7bbff67a0a",
+    "role": "Joe Mama"
+}
+
+### deleteRelationship
+DELETE https://rate-a-movie.onrender.com/movie-actors/667e3febcba6698e8652d85b
