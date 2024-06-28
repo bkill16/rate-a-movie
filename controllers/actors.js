@@ -1,4 +1,6 @@
 const Actor = require("../models/Actor");
+const Movie = require("../models/Movie");
+const MovieActor = require("../models/MovieActor");
 
 async function getAllActors(req, res) {
   try {
@@ -39,7 +41,43 @@ async function getActorByName(req, res) {
   }
 }
 
-// getActorByMovie
+async function getCastByMovieTitle(req, res) {
+  try {
+    const movieTitle = req.params.title;
+    const movie = await Movie.findOne({ title: new RegExp(movieTitle, "i") });
+
+    if (!movie) {
+      return res.status(404).json({ message: "Movie not found" });
+    }
+
+    const movieActorLinks = await MovieActor.find({ movieId: movie._id })
+      .populate({
+        path: "actorId",
+        select: "name gender dob dod nationality",
+      })
+      .lean();
+
+    if (!movieActorLinks.length) {
+      return res
+        .status(404)
+        .json({ message: "No actors found for this movie" });
+    }
+
+    const cast = movieActorLinks.map((link) => ({
+      ...link.actorId,
+      role: link.role,
+    }));
+
+    res.status(200).json({
+      movie: movie.title,
+      cast: cast,
+    });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: `Error fetching actors for movie: ${err.message}` });
+  }
+}
 
 async function createActor(req, res) {
   const { name, gender, dob, dod, nationality } = req.body;
@@ -92,7 +130,9 @@ async function deleteActor(req, res) {
     }
 
     const deletedActor = await Actor.findByIdAndDelete(actorId);
-    res.status(204).json({ message: "Actor deleted successfully" });
+    res
+      .status(204)
+      .json({ message: "Actor deleted successfully", deletedActor });
   } catch (err) {
     res.status(500).json({ message: `Error deleting actor: ${err.message}` });
   }
@@ -102,7 +142,8 @@ module.exports = {
   getAllActors,
   getActorById,
   getActorByName,
+  getCastByMovieTitle,
   createActor,
   updateActor,
-  deleteActor
+  deleteActor,
 };

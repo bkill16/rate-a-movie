@@ -1,0 +1,95 @@
+// localhost
+
+### getAllMovies
+GET http://localhost:8080/movies
+
+### getSingleMovie
+GET http://localhost:8080/movies/667b1de0f592b5c99c067fc3
+
+### getMovieByTitle
+GET http://localhost:8080/movies/title/Star%20Wars:%20Attack%20of%20the%20Clones%20(Episode%20II)
+
+### getMovieByTitle
+GET http://localhost:8080/movies/title/Star%20Wars:%20A%20New%20Hope%20(Episode%20IV) 
+
+### getMovieByActorName
+GET http://localhost:8080/movies/actor/ewan%20mcgregor
+
+### createMovie
+POST http://localhost:8080/movies
+Content-Type: application/json
+
+{
+    "title": "Cool Movie",
+    "director": "Cool release date",
+    "production_company": "Cool production company",
+    "distribution_company": "Cool distribution company",
+    "US_release_date": "1999-05-19T06:00:00.000Z",
+    "running_time": "999",
+    "audience_rating": "G"
+}
+
+### updateMovie
+PUT http://localhost:8080/movies/667e3bf3fd21eb55a3819ef1 
+Content-Type: application/json
+
+{
+    "title": "Awesome Movie",
+    "director": "Cool release date",
+    "production_company": "Cool production company",
+    "distribution_company": "Cool distribution company",
+    "US_release_date": "1999-05-19T06:00:00.000Z",
+    "running_time": "999",
+    "audience_rating": "PG"
+}
+
+### deleteMovie
+DELETE http://localhost:8080/movies/667e3bf3fd21eb55a3819ef1 
+
+// render
+
+### getAllMovies
+GET https://rate-a-movie.onrender.com/movies 
+
+### getSingleMovie
+GET https://rate-a-movie.onrender.com/movies/667b1de0f592b5c99c067fc3 
+
+### getMovieByTitle
+GET https://rate-a-movie.onrender.com/movies/title/Star%20Wars:%20Attack%20of%20the%20Clones%20(Episode%20II) 
+
+### getMovieByTitle
+GET https://rate-a-movie.onrender.com/movies/title/Star%20Wars:%20A%20New%20Hope%20(Episode%20IV) 
+
+### getMovieByActorName
+GET https://rate-a-movie.onrender.com/movies/actor/ewan%20mcgregor 
+
+### createMovie
+POST https://rate-a-movie.onrender.com/movies
+Content-Type: application/json
+
+{
+    "title": "Cool Movie",
+    "director": "Cool release date",
+    "production_company": "Cool production company",
+    "distribution_company": "Cool distribution company",
+    "US_release_date": "1999-05-19T06:00:00.000Z",
+    "running_time": "999",
+    "audience_rating": "G"
+}
+
+### updateMovie
+PUT https://rate-a-movie.onrender.com/movies/667e3bf3fd21eb55a3819ef1 
+Content-Type: application/json
+
+{
+    "title": "Awesome Movie",
+    "director": "Cool release date",
+    "production_company": "Cool production company",
+    "distribution_company": "Cool distribution company",
+    "US_release_date": "1999-05-19T06:00:00.000Z",
+    "running_time": "999",
+    "audience_rating": "PG"
+}
+
+### deleteMovie
+DELETE https://rate-a-movie.onrender.com/movies/667e3bf3fd21eb55a3819ef1 
