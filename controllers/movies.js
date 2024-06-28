@@ -1,6 +1,8 @@
 // refactored using mongoose
 
 const Movie = require("../models/Movie");
+const Actor = require("../models/Actor");
+const MovieActor = require("../models/MovieActor");
 
 async function getAllMovies(req, res) {
   try {
@@ -26,9 +28,61 @@ async function getSingleMovie(req, res) {
   }
 }
 
-// getMovieByTitle
+function escapeRegex(string) {
+  return string.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&");
+}
 
-// getMovieByActorName
+async function getMovieByTitle(req, res) {
+  try {
+    const movieTitle = req.params.title;
+    const escapedTitle = escapeRegex(movieTitle);
+    const regex = new RegExp(escapedTitle, "i");
+    const movie = await Movie.find({ title: regex });
+
+    if (!movie) {
+      return res.status(404).json({ message: "Movie not found" });
+    }
+
+    res.status(200).json(movie);
+  } catch (err) {
+    res.status(500).json({ message: `Error fetching movie: ${err.message}` });
+  }
+}
+
+async function getMovieByActorName(req, res) {
+  try {
+    const actorName = req.params.name;
+    const actor = await Actor.findOne({ name: new RegExp(actorName, "i") });
+
+    if (!actor) {
+      return res.status(404).json({ message: "Actor not found" });
+    }
+
+    const movieActorLinks = await MovieActor.find({ actorId: actor._id })
+      .populate({
+        path: "movieId",
+        select: "-roles",
+      })
+      .lean();
+
+    if (!movieActorLinks.length) {
+      return res
+        .status(404)
+        .json({ message: "No movies found for this actor" });
+    }
+
+    const moviesWithRoles = movieActorLinks.map((link) => ({
+      ...link.movieId,
+      role: link.role,
+    }));
+
+    res.status(200).json(moviesWithRoles);
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: `Error fetching movies by actor name: ${err.message}` });
+  }
+}
 
 async function createMovie(req, res) {
   const {
@@ -53,7 +107,7 @@ async function createMovie(req, res) {
     });
 
     const savedMovie = await newMovie.save();
-    res.status(201).json({ message: "Movie created successfully" });
+    res.status(201).json({ message: "Movie created successfully", savedMovie });
   } catch (err) {
     res.status(400).json({ message: `Error creating movie: ${err.message}` });
   }
@@ -63,7 +117,6 @@ async function updateMovie(req, res) {
   try {
     const movieId = req.params.id;
     const updateData = req.body;
-
     const movie = await Movie.findById(movieId);
 
     if (!movie) {
@@ -85,7 +138,6 @@ async function updateMovie(req, res) {
 async function deleteMovie(req, res) {
   try {
     const movieId = req.params.id;
-
     const movie = await Movie.findById(movieId);
 
     if (!movie) {
@@ -93,20 +145,23 @@ async function deleteMovie(req, res) {
     }
 
     const deletedMovie = await Movie.findByIdAndDelete(movieId);
-    res.status(204).json({ message: "Movie deleted successfully" });
+    res
+      .status(204)
+      .json({ message: "Movie deleted successfully", deletedMovie });
   } catch (err) {
     res.status(500).json({ message: `Error deleting movie: ${err.message}` });
   }
 }
 
 module.exports = {
-    getAllMovies,
-    getSingleMovie,
-    // getMovieByActorId,
-    createMovie,
-    updateMovie,
-    deleteMovie
-}
+  getAllMovies,
+  getSingleMovie,
+  getMovieByTitle,
+  getMovieByActorName,
+  createMovie,
+  updateMovie,
+  deleteMovie,
+};
 
 // const { MongoClient } = require("mongodb");
 // const ObjectId = require("mongodb").ObjectId;

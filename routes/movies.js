@@ -4,6 +4,8 @@ const moviesController = require("../controllers/movies");
 
 router.get("/", moviesController.getAllMovies);
 router.get("/:id", moviesController.getSingleMovie);
+router.get("/title/:title", moviesController.getMovieByTitle);
+router.get("/actor/:name", moviesController.getMovieByActorName);
 router.post("/", moviesController.createMovie);
 router.put("/:id", moviesController.updateMovie);
 router.delete("/:id", moviesController.deleteMovie);
