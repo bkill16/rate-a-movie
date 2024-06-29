@@ -18,22 +18,33 @@ const getAllReviews = async (req, res) => {
 };
 
 const getSingleReview = async (req, res) => {
+    let client;
     try {
         res.setHeader("Access-Control-Allow-Origin", "*");
         if (!ObjectId.isValid(req.params.id)) {
             return res.status(400).json('Must use a valid review id to get a review.');
         }
+        
         const reviewId = new ObjectId(req.params.id);
-        const client = new MongoClient(process.env.MONGODB_URI);
+        client = new MongoClient(process.env.MONGODB_URI);
         await client.connect();
+        
         const db = client.db();
         const collection = db.collection("reviews");
-        const data = collection.find({ _id: reviewId });
-        const result = await data.toArray();
+        const result = await collection.findOne({ _id: reviewId });
+
+        if (!result) {
+            return res.status(404).json('Review not found');
+        }
+
+        res.setHeader('Content-Type', 'application/json');
         res.json(result);
-        client.close();
     } catch (error) {
         res.status(500).json(error.message || "Some error occurred while getting a single review.");
+    } finally {
+        if (client) {
+            await client.close();
+        }
     }
 };
 
