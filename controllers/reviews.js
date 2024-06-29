@@ -1,170 +1,171 @@
-const { MongoClient } = require("mongodb");
-const ObjectId = require("mongodb").ObjectId;
+const Review = require('../models/Reviews');
+const Movie = require('../models/Movie');
+const mongoose = require('mongoose');
 
 const getAllReviews = async (req, res) => {
     try {
         res.setHeader("Access-Control-Allow-Origin", "*");
-        const client = new MongoClient(process.env.MONGODB_URI);
-        await client.connect();
-        const db = client.db();
-        const collection = db.collection("reviews");
-        const data = collection.find();
-        const result = await data.toArray();
-        res.json(result);
-        client.close();
+        const reviews = await Review.find();
+        res.json(reviews);
     } catch (error) {
-        res.status(500).json(error.message || "Some error occurred while getting all reviews.");
+        res.status(500).json({ message: error.message || "Some error occurred while getting all reviews." });
     }
 };
 
 const getSingleReview = async (req, res) => {
-    let client;
     try {
         res.setHeader("Access-Control-Allow-Origin", "*");
-        if (!ObjectId.isValid(req.params.id)) {
-            return res.status(400).json('Must use a valid review id to get a review.');
+        if (!mongoose.Types.ObjectId.isValid(req.params.reviewId)) {
+            return res.status(400).json({ message: 'Must use a valid review id to get a review.' });
         }
         
-        const reviewId = new ObjectId(req.params.id);
-        client = new MongoClient(process.env.MONGODB_URI);
-        await client.connect();
+        const review = await Review.findById(req.params.reviewId);
+
+        if (!review) {
+            return res.status(404).json({ message: 'Review not found' });
+        }
+
+        res.json(review);
+    } catch (error) {
+        res.status(500).json({ message: error.message || "Some error occurred while getting a single review." });
+    }
+};
+
+const getReviewsByTitle = async (req, res) => {
+    try {
+        res.setHeader("Access-Control-Allow-Origin", "*");
+        const movieTitle = decodeURIComponent(req.params.title);
         
-        const db = client.db();
-        const collection = db.collection("reviews");
-        const result = await collection.findOne({ _id: reviewId });
-
-        if (!result) {
-            return res.status(404).json('Review not found');
+        // Use a more flexible search
+        const movie = await Movie.findOne({ 
+            title: { $regex: new RegExp(movieTitle.split(':')[0], 'i') }
+        });
+        
+        if (!movie) {
+            return res.status(404).json({ message: 'Movie not found' });
         }
-
-        res.setHeader('Content-Type', 'application/json');
-        res.json(result);
+        
+        // Then, find reviews associated with this movie's ID
+        const reviews = await Review.find({ movie_id: movie._id });
+        
+        if (reviews.length === 0) {
+            return res.status(404).json({ 
+                message: 'No reviews found for this movie',
+                movieTitle: movie.title  // Include the actual movie title in the response
+            });
+        }
+        
+        res.json({
+            movie: movie.title,
+            reviews: reviews
+        });
     } catch (error) {
-        res.status(500).json(error.message || "Some error occurred while getting a single review.");
-    } finally {
-        if (client) {
-            await client.close();
-        }
+        res.status(500).json({ message: error.message || "Some error occurred while getting reviews by movie title." });
     }
 };
 
-// needs to be reviewd to match user oject once the collection is created
 
-const getReviewsByUserId = async (req, res) => {
-    try {
-        res.setHeader("Access-Control-Allow-Origin", "*");
-        if (!ObjectId.isValid(req.params.id)) {
-            return res.status(400).json('Must use a valid user id to get reviews.');
-        }
-        const userId = new ObjectId(req.params.id);
-        const client = new MongoClient(process.env.MONGODB_URI);
-        await client.connect();
-        const db = client.db();
-        const collection = db.collection("reviews");
-        const data = collection.find({ user_id: userId });
-        const result = await data.toArray();
-        res.json(result);
-        client.close();
-    } catch (error) {
-        res.status(500).json(error.message || "Some error occurred while getting reviews by user ID.");
-    }
-};
 
-const getReviewsByMovieId = async (req, res) => {
-    try {
-        res.setHeader("Access-Control-Allow-Origin", "*");
-        if (!ObjectId.isValid(req.params.id)) {
-            return res.status(400).json('Must use a valid movie id to get reviews.');
-        }
-        const movieId = new ObjectId(req.params.id);
-        const client = new MongoClient(process.env.MONGODB_URI);
-        await client.connect();
-        const db = client.db();
-        const collection = db.collection("reviews");
-        const data = collection.find({ movie_id: movieId });
-        const result = await data.toArray();
-        res.json(result);
-        client.close();
-    } catch (error) {
-        res.status(500).json(error.message || "Some error occurred while getting reviews by movie ID.");
-    }
-};
+// const getReviewsByUserId = async (req, res) => {
+//     try {
+//         res.setHeader("Access-Control-Allow-Origin", "*");
+//         if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+//             return res.status(400).json({ message: 'Must use a valid user id to get reviews.' });
+//         }
+//         const reviews = await Review.find({ user_id: req.params.id });
+//         res.json(reviews);
+//     } catch (error) {
+//         res.status(500).json({ message: error.message || "Some error occurred while getting reviews by user ID." });
+//     }
+// };
 
 const createNewReview = async (req, res) => {
     try {
-        const review = {
-            user_id: new ObjectId(req.body.user_id),
-            movie_id: new ObjectId(req.body.movie_id),
-            rating: req.body.rating,
-            comment: req.body.comment,
-            date: new Date()
-        };
-        const client = new MongoClient(process.env.MONGODB_URI);
-        await client.connect();
-        const response = await client.db().collection("reviews").insertOne(review);
-        if (response.acknowledged) {
-            res.status(201).json(response);
-        } else {
-            res.status(500).json("Some error occurred while creating the review.");
+        const { movie_id, rating, comment } = req.body;
+
+        // Check if movie_id, rating, and comment are present
+        if (!movie_id || !rating || !comment) {
+            return res.status(400).json({ message: "Movie ID, rating, and comment are required." });
         }
-        client.close();
+
+        const review = new Review({
+            movie_id: movie_id,
+            rating: rating,
+            comment: comment
+        });
+
+        const savedReview = await review.save();
+        res.status(201).json(savedReview);
     } catch (error) {
-        res.status(500).json(error.message || "Some error occurred while creating the review.");
+        res.status(500).json({ message: error.message || "Some error occurred while creating the review." });
     }
 };
 
 const updateReview = async (req, res) => {
     try {
-        if (!ObjectId.isValid(req.params.id)) {
-            return res.status(400).json('Must use a valid review id to update a review.');
+        const { reviewId } = req.params;
+        const { movie_id, rating, comment } = req.body;
+
+        console.log(`Attempting to update review with ID: ${reviewId}`);
+
+        // Check if reviewId is valid
+        if (!mongoose.Types.ObjectId.isValid(reviewId)) {
+            return res.status(400).json({ message: 'Invalid review ID.' });
         }
-        const reviewId = new ObjectId(req.params.id);
-        const review = {
-            user_id: new ObjectId(req.body.user_id),
-            movie_id: new ObjectId(req.body.movie_id),
-            rating: req.body.rating,
-            comment: req.body.comment,
-            date: new Date()
-        };
-        const client = new MongoClient(process.env.MONGODB_URI);
-        await client.connect();
-        const response = await client.db().collection("reviews").replaceOne({ _id: reviewId }, review);
-        if (response.modifiedCount > 0) {
-            res.status(204).send();
-        } else {
-            res.status(500).json("Some error occurred while updating the review.");
+
+        // Check if rating and comment are present
+        if (!rating || !comment) {
+            return res.status(400).json({ message: "Rating and comment are required." });
         }
-        client.close();
+
+        // Prepare update object
+        const updateObj = { rating, comment };
+        if (movie_id) {
+            if (!mongoose.Types.ObjectId.isValid(movie_id)) {
+                return res.status(400).json({ message: 'Invalid movie ID.' });
+            }
+            updateObj.movie_id = movie_id;
+        }
+
+        const updatedReview = await Review.findByIdAndUpdate(
+            reviewId,
+            updateObj,
+            { new: true, runValidators: true }
+        );
+
+        if (!updatedReview) {
+            console.log(`No review found with ID: ${reviewId}`);
+            return res.status(404).json({ message: 'Review not found for update.' });
+        }
+
+        console.log(`Successfully updated review with ID: ${reviewId}`);
+        res.json(updatedReview);
     } catch (error) {
-        res.status(500).json(error.message || "Some error occurred while updating the review.");
+        console.error(`Error updating review: ${error.message}`);
+        res.status(500).json({ message: error.message || "Some error occurred while updating the review." });
     }
 };
 
 const deleteReview = async (req, res) => {
     try {
-        if (!ObjectId.isValid(req.params.id)) {
-            return res.status(400).json('Must use a valid review id to delete a review.');
+        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+            return res.status(400).json({ message: 'Must use a valid review id to delete a review.' });
         }
-        const reviewId = new ObjectId(req.params.id);
-        const client = new MongoClient(process.env.MONGODB_URI);
-        await client.connect();
-        const response = await client.db().collection("reviews").deleteOne({ _id: reviewId });
-        if (response.deletedCount > 0) {
-            res.status(204).send();
-        } else {
-            res.status(500).json("Some error occurred while deleting the review.");
+        const deletedReview = await Review.findByIdAndDelete(req.params.id);
+        if (!deletedReview) {
+            return res.status(404).json({ message: 'Review not found' });
         }
-        client.close();
+        res.status(204).send();
     } catch (error) {
-        res.status(500).json(error.message || "Some error occurred while deleting the review.");
+        res.status(500).json({ message: error.message || "Some error occurred while deleting the review." });
     }
 };
 
 module.exports = {
     getAllReviews,
     getSingleReview,
-    getReviewsByUserId,
-    getReviewsByMovieId,
+    // getReviewsByUserId,
+    getReviewsByTitle,
     createNewReview,
     updateReview,
     deleteReview
