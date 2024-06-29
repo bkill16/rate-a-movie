@@ -1,34 +1,73 @@
-### Get all reviews
+// localhost
+
+### getAllreviewss
 GET http://localhost:8080/reviews
 
-### Get a single review by review ID
-GET http://localhost:8080/reviews/review/66803d088002b0e0de32ec4d
+### getSinglereviews
+GET http://localhost:8080/reviews/66803d088002b0e0de32ec4d
 
-### Get reviews by user ID
-GET http://localhost:8080/reviews/user/userId
+### getreviewsByTitle
+GET http://localhost:8080/reviews/title/Star%20Wars:%20Attack%20of%20the%20Clones%20(Episode%20II)
 
-### Get reviews by movie ID
-GET http://localhost:8080/reviews/movie/movieId
-
-### Create a new review
+### createreviews
 POST http://localhost:8080/reviews
 Content-Type: application/json
 
 {
-    "user_id": "user_id_here",
-    "movie_id": "movie_id_here",
-    "rating": 5,
-    "comment": "Great movie!"
+    "movie_id": "667b1de0f592b5c99c067fc6", 
+    "rating": 4,
+    "comment": "This movie was great!"
 }
 
-### Update a review by review ID
-PUT http://localhost:8080/reviews/update/66803d088002b0e0de32ec4d
+### updatereviews
+
+PUT http://localhost:8080/reviews/66807a8ad26ffd2067994693
 Content-Type: application/json
 
 {
-    "rating": 4,
-    "comment": "Liked it, but could have been better."
+  "rating": 4,
+  "comment": "This is an updated comment for the movie",
+  "movie_id": "667b1de0f592b5c99c067fc6"
 }
 
-### Delete a review by review ID
-DELETE http://localhost:8080/reviews/delete/66803d088002b0e0de32ec4d
+
+### deletereviews
+DELETE http://localhost:8080/reviews/66807d076fbc7ebc80070f78
+
+// render
+
+### getAllreviewss
+GET https://rate-a-reviews.onrender.com/reviews
+
+
+### getSinglereviews
+GET https://rate-a-reviews.onrender.com/reviews/66803d088002b0e0de32ec4d
+
+### getreviewsByTitle
+GET https://rate-a-reviews.onrender.com/reviews/title/Star%20Wars:%20Attack%20of%20the%20Clones%20(Episode%20II)
+
+### createreviews
+POST https://rate-a-reviews.onrender.com/reviews
+Content-Type: application/json
+
+{
+    "movie_id": "667b1de0f592b5c99c067fc6", 
+    "rating": 4,
+    "comment": "This movie was great!"
+}
+
+### updatereviews
+
+PUT https://rate-a-reviews.onrender.com/reviews/66807a8ad26ffd2067994693
+Content-Type: application/json
+
+{
+  "rating": 4,
+  "comment": "This is an updated comment for the movie",
+  "movie_id": "667b1de0f592b5c99c067fc6"
+}
+
+
+### deletereviews
+DELETE https://rate-a-reviews.onrender.com/reviews/66807d076fbc7ebc80070f78
+
