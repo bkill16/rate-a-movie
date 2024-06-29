@@ -10,7 +10,7 @@ routes.get('/api-docs', swaggerUi.setup(swaggerDocument)); // http://localhost:8
 
 
 routes.use("/users", require("./users"));
-// routes.use("/review", require("./review")); - commented out due to bugs
+routes.use("/reviews", require("./review"));
 routes.use("/actors", require("./actors"));
 routes.use("/movie-actors", require("./movieActors"));
 routes.use("/movies", require("./movies"))
