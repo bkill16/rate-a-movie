@@ -10,83 +10,32 @@
   ],
   "basePath": "/",
   "schemes": [
-    "http",
-    "https"
+    "http"
   ],
   "paths": {
+    "/api-docs": {
+      "get": {
+        "description": "Retrieves API documentation.",
+        "responses": {
+          "default": {
+            "description": "Default response"
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "description": "Fetches the root endpoint of the API.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/users/": {
-      "post": {
-        "description": "Create a new user.",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/users/login": {
       "get": {
-        "description": "User login.",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/users/logout": {
-      "get": {
-        "description": "User logout.",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/users/{id}": {
-      "get": {
-        "description": "Retrieve user details by ID.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "put": {
-        "description": "Update user details by ID.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "delete": {
-        "description": "Delete user by ID.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
+        "description": "Fetches a list of users.",
         "responses": {
           "200": {
             "description": "OK"
@@ -96,7 +45,7 @@
     },
     "/reviews/": {
       "get": {
-        "description": "Get all reviews.",
+        "description": "Fetches a list of reviews.",
         "responses": {
           "200": {
             "description": "OK"
@@ -107,7 +56,7 @@
         }
       },
       "post": {
-        "description": "Create a new review.",
+        "description": "Creates a new review.",
         "parameters": [
           {
             "name": "body",
@@ -115,9 +64,6 @@
             "schema": {
               "type": "object",
               "properties": {
-                "user_id": {
-                  "example": "any"
-                },
                 "movie_id": {
                   "example": "any"
                 },
@@ -135,15 +81,18 @@
           "201": {
             "description": "Created"
           },
+          "400": {
+            "description": "Bad Request"
+          },
           "500": {
             "description": "Internal Server Error"
           }
         }
       }
     },
-    "/reviews/review/{reviewId}": {
+    "/reviews/{reviewId}": {
       "get": {
-        "description": "Get a review by ID.",
+        "description": "Fetches a review by its ID.",
         "parameters": [
           {
             "name": "reviewId",
@@ -166,59 +115,9 @@
             "description": "Internal Server Error"
           }
         }
-      }
-    },
-    "/reviews/user/{userId}": {
-      "get": {
-        "description": "Get reviews by user ID.",
-        "parameters": [
-          {
-            "name": "userId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/reviews/movie/{movieId}": {
-      "get": {
-        "description": "Get reviews by movie ID.",
-        "parameters": [
-          {
-            "name": "movieId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/reviews/update/{reviewId}": {
+      },
       "put": {
-        "description": "Update a review by ID.",
+        "description": "Updates a review by its ID.",
         "parameters": [
           {
             "name": "reviewId",
@@ -232,9 +131,6 @@
             "schema": {
               "type": "object",
               "properties": {
-                "user_id": {
-                  "example": "any"
-                },
                 "movie_id": {
                   "example": "any"
                 },
@@ -249,21 +145,22 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "200": {
+            "description": "OK"
           },
           "400": {
             "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
           }
         }
-      }
-    },
-    "/reviews/delete/{reviewId}": {
+      },
       "delete": {
-        "description": "Delete a review by ID.",
+        "description": "Deletes a review by its ID.",
         "parameters": [
           {
             "name": "reviewId",
@@ -279,6 +176,33 @@
           "400": {
             "description": "Bad Request"
           },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/reviews/title/{title}": {
+      "get": {
+        "description": "Fetches reviews by movie title.",
+        "parameters": [
+          {
+            "name": "title",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -287,7 +211,7 @@
     },
     "/actors/": {
       "get": {
-        "description": "Get all actors.",
+        "description": "Fetches a list of actors.",
         "responses": {
           "200": {
             "description": "OK"
@@ -298,7 +222,7 @@
         }
       },
       "post": {
-        "description": "Create a new actor.",
+        "description": "Creates a new actor.",
         "parameters": [
           {
             "name": "body",
@@ -337,7 +261,7 @@
     },
     "/actors/{id}": {
       "get": {
-        "description": "Get actor details by ID.",
+        "description": "Fetches an actor by their ID.",
         "parameters": [
           {
             "name": "id",
@@ -359,7 +283,7 @@
         }
       },
       "put": {
-        "description": "Update actor details by ID.",
+        "description": "Updates an actor by their ID.",
         "parameters": [
           {
             "name": "id",
@@ -381,7 +305,7 @@
         }
       },
       "delete": {
-        "description": "Delete actor by ID.",
+        "description": "Deletes an actor by their ID.",
         "parameters": [
           {
             "name": "id",
@@ -405,7 +329,7 @@
     },
     "/actors/name/{name}": {
       "get": {
-        "description": "Get actor details by name.",
+        "description": "Fetches actors by their name.",
         "parameters": [
           {
             "name": "name",
@@ -429,7 +353,7 @@
     },
     "/actors/movie/{title}": {
       "get": {
-        "description": "Get actors by movie title.",
+        "description": "Fetches actors by movie title.",
         "parameters": [
           {
             "name": "title",
@@ -453,7 +377,7 @@
     },
     "/movie-actors/": {
       "get": {
-        "description": "Get all movie-actor relationships.",
+        "description": "Fetches a list of movie-actor relationships.",
         "responses": {
           "200": {
             "description": "OK"
@@ -464,7 +388,7 @@
         }
       },
       "post": {
-        "description": "Create a new movie-actor relationship.",
+        "description": "Creates a new movie-actor relationship.",
         "parameters": [
           {
             "name": "body",
@@ -497,7 +421,7 @@
     },
     "/movie-actors/{id}": {
       "put": {
-        "description": "Update movie-actor relationship by ID.",
+        "description": "Updates a movie-actor relationship by its ID.",
         "parameters": [
           {
             "name": "id",
@@ -519,7 +443,7 @@
         }
       },
       "delete": {
-        "description": "Delete movie-actor relationship by ID.",
+        "description": "Deletes a movie-actor relationship by its ID.",
         "parameters": [
           {
             "name": "id",
@@ -543,7 +467,7 @@
     },
     "/movies/": {
       "get": {
-        "description": "Get all movies.",
+        "description": "Fetches a list of movies.",
         "responses": {
           "200": {
             "description": "OK"
@@ -554,7 +478,7 @@
         }
       },
       "post": {
-        "description": "Create a new movie.",
+        "description": "Creates a new movie.",
         "parameters": [
           {
             "name": "body",
@@ -599,7 +523,7 @@
     },
     "/movies/{id}": {
       "get": {
-        "description": "Get movie details by ID.",
+        "description": "Fetches a movie by its ID.",
         "parameters": [
           {
             "name": "id",
@@ -621,7 +545,7 @@
         }
       },
       "put": {
-        "description": "Update movie details by ID.",
+        "description": "Updates a movie by its ID.",
         "parameters": [
           {
             "name": "id",
@@ -643,7 +567,7 @@
         }
       },
       "delete": {
-        "description": "Delete movie by ID.",
+        "description": "Deletes a movie by its ID.",
         "parameters": [
           {
             "name": "id",
@@ -667,7 +591,7 @@
     },
     "/movies/title/{title}": {
       "get": {
-        "description": "Get movie details by title.",
+        "description": "Fetches movies by their title.",
         "parameters": [
           {
             "name": "title",
@@ -691,7 +615,7 @@
     },
     "/movies/actor/{name}": {
       "get": {
-        "description": "Get movies by actor name.",
+        "description": "Fetches movies by actor's name.",
         "parameters": [
           {
             "name": "name",
@@ -712,150 +636,7 @@
           }
         }
       }
-    },
-    "/review/{reviewId}": {
-      "get": {
-        "description": "Retrieve a review by review ID.",
-        "parameters": [
-          {
-            "name": "reviewId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/user/{userId}": {
-      "get": {
-        "description": "Retrieve user details by user ID.",
-        "parameters": [
-          {
-            "name": "userId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/movie/{movieId}": {
-      "get": {
-        "description": "Retrieve movie details by movie ID.",
-        "parameters": [
-          {
-            "name": "movieId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/update/{reviewId}": {
-      "put": {
-        "description": "Update a review by review ID.",
-        "parameters": [
-          {
-            "name": "reviewId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "user_id": {
-                  "example": "any"
-                },
-                "movie_id": {
-                  "example": "any"
-                },
-                "rating": {
-                  "example": "any"
-                },
-                "comment": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/delete/{reviewId}": {
-      "delete": {
-        "description": "Delete a review by review ID.",
-        "parameters": [
-          {
-            "name": "reviewId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
     }
   }
 }
+       
