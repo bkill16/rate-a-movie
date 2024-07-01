@@ -6,7 +6,7 @@
     "version": "1.0.0"
   },
   "host": [
-    "https://rate-a-movie.onrender.com"
+    "rate-a-movie.onrender.com"
   ],
   "basePath": "/",
   "schemes": [
