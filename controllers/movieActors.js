@@ -60,7 +60,7 @@ async function updateRelationship(req, res) {
     );
 
     res
-      .status(200)
+      .status(204)
       .json({
         message: "Movie actor relationship updated successfully",
         updatedRelationship,

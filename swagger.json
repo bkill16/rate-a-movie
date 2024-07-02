@@ -12,9 +12,32 @@
   "schemes": [
     "https"
   ],
+  "tags": [
+    {
+      "name": "User",
+      "description": "User Routes"
+    },
+    {
+      "name": "Review",
+      "description": "Review Routes"
+    },
+    {
+      "name": "Movie",
+      "description": "Movie Routes"
+    },
+    {
+      "name": "Actor",
+      "description": "Actor Routes"
+    },
+    {
+      "name": "MovieActor",
+      "description": "MovieActor Routes"
+    }
+  ],
   "paths": {
     "/users/": {
       "post": {
+        "tags": ["User"],
         "description": "Create a new user.",
         "responses": {
           "200": {
@@ -25,6 +48,7 @@
     },
     "/users/login": {
       "get": {
+        "tags": ["User"],
         "description": "User login.",
         "responses": {
           "200": {
@@ -35,6 +59,7 @@
     },
     "/users/logout": {
       "get": {
+        "tags": ["User"],
         "description": "User logout.",
         "responses": {
           "200": {
@@ -45,6 +70,7 @@
     },
     "/users/{id}": {
       "get": {
+        "tags": ["User"],
         "description": "Retrieve user details by ID.",
         "parameters": [
           {
@@ -61,6 +87,7 @@
         }
       },
       "put": {
+        "tags": ["User"],
         "description": "Update user details by ID.",
         "parameters": [
           {
@@ -77,6 +104,7 @@
         }
       },
       "delete": {
+        "tags": ["User"],
         "description": "Delete user by ID.",
         "parameters": [
           {
@@ -95,6 +123,7 @@
     },
     "/reviews/": {
       "get": {
+        "tags": ["Review"],
         "description": "Get all reviews.",
         "responses": {
           "200": {
@@ -106,6 +135,7 @@
         }
       },
       "post": {
+        "tags": ["Review"],
         "description": "Create a new review.",
         "parameters": [
           {
@@ -142,6 +172,7 @@
     },
     "/reviews/review/{reviewId}": {
       "get": {
+        "tags": ["Review"],
         "description": "Get a review by ID.",
         "parameters": [
           {
@@ -169,6 +200,7 @@
     },
     "/reviews/user/{userId}": {
       "get": {
+        "tags": ["Review"],
         "description": "Get reviews by user ID.",
         "parameters": [
           {
@@ -193,6 +225,7 @@
     },
     "/reviews/movie/{movieId}": {
       "get": {
+        "tags": ["Review"],
         "description": "Get reviews by movie ID.",
         "parameters": [
           {
@@ -217,6 +250,7 @@
     },
     "/reviews/update/{reviewId}": {
       "put": {
+        "tags": ["Review"],
         "description": "Update a review by ID.",
         "parameters": [
           {
@@ -262,6 +296,7 @@
     },
     "/reviews/delete/{reviewId}": {
       "delete": {
+        "tags": ["Review"],
         "description": "Delete a review by ID.",
         "parameters": [
           {
@@ -286,6 +321,7 @@
     },
     "/actors/": {
       "get": {
+        "tags": ["Actor"],
         "description": "Get all actors.",
         "responses": {
           "200": {
@@ -297,6 +333,7 @@
         }
       },
       "post": {
+        "tags": ["Actor"],
         "description": "Create a new actor.",
         "parameters": [
           {
@@ -306,19 +343,19 @@
               "type": "object",
               "properties": {
                 "name": {
-                  "example": "any"
+                  "example": "Robert Downy Jr"
                 },
                 "gender": {
-                  "example": "any"
+                  "example": "Male"
                 },
                 "dob": {
-                  "example": "any"
+                  "example": "1965-04-04T00:00:00.000Z"
                 },
                 "dod": {
-                  "example": "any"
+                  "example": "null"
                 },
                 "nationality": {
-                  "example": "any"
+                  "example": "American"
                 }
               }
             }
@@ -336,6 +373,7 @@
     },
     "/actors/{id}": {
       "get": {
+        "tags": ["Actor"],
         "description": "Get actor details by ID.",
         "parameters": [
           {
@@ -358,6 +396,7 @@
         }
       },
       "put": {
+        "tags": ["Actor"],
         "description": "Update actor details by ID.",
         "parameters": [
           {
@@ -368,7 +407,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "OK"
           },
           "404": {
@@ -380,6 +419,7 @@
         }
       },
       "delete": {
+        "tags": ["Actor"],
         "description": "Delete actor by ID.",
         "parameters": [
           {
@@ -404,6 +444,7 @@
     },
     "/actors/name/{name}": {
       "get": {
+        "tags": ["Actor"],
         "description": "Get actor details by name.",
         "parameters": [
           {
@@ -428,6 +469,7 @@
     },
     "/actors/movie/{title}": {
       "get": {
+        "tags": ["Actor"],
         "description": "Get actors by movie title.",
         "parameters": [
           {
@@ -452,6 +494,7 @@
     },
     "/movie-actors/": {
       "get": {
+        "tags": ["MovieActor"],
         "description": "Get all movie-actor relationships.",
         "responses": {
           "200": {
@@ -463,6 +506,7 @@
         }
       },
       "post": {
+        "tags": ["MovieActor"],
         "description": "Create a new movie-actor relationship.",
         "parameters": [
           {
@@ -472,13 +516,13 @@
               "type": "object",
               "properties": {
                 "movieId": {
-                  "example": "any"
+                  "example": "667b1de0f592b5c99c067fc3"
                 },
                 "actorId": {
-                  "example": "any"
+                  "example": "667ca138ea8a0e7bbff67a0b"
                 },
                 "role": {
-                  "example": "any"
+                  "example": "John Doe"
                 }
               }
             }
@@ -496,6 +540,7 @@
     },
     "/movie-actors/{id}": {
       "put": {
+        "tags": ["MovieActor"],
         "description": "Update movie-actor relationship by ID.",
         "parameters": [
           {
@@ -506,7 +551,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "OK"
           },
           "404": {
@@ -518,6 +563,7 @@
         }
       },
       "delete": {
+        "tags": ["MovieActor"],
         "description": "Delete movie-actor relationship by ID.",
         "parameters": [
           {
@@ -542,6 +588,7 @@
     },
     "/movies/": {
       "get": {
+        "tags": ["Movie"],
         "description": "Get all movies.",
         "responses": {
           "200": {
@@ -553,6 +600,7 @@
         }
       },
       "post": {
+        "tags": ["Movie"],
         "description": "Create a new movie.",
         "parameters": [
           {
@@ -598,6 +646,7 @@
     },
     "/movies/{id}": {
       "get": {
+        "tags": ["Movie"],
         "description": "Get movie details by ID.",
         "parameters": [
           {
@@ -620,6 +669,7 @@
         }
       },
       "put": {
+        "tags": ["Movie"],
         "description": "Update movie details by ID.",
         "parameters": [
           {
@@ -630,7 +680,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "OK"
           },
           "404": {
@@ -642,6 +692,7 @@
         }
       },
       "delete": {
+        "tags": ["Movie"],
         "description": "Delete movie by ID.",
         "parameters": [
           {
@@ -666,6 +717,7 @@
     },
     "/movies/title/{title}": {
       "get": {
+        "tags": ["Movie"],
         "description": "Get movie details by title.",
         "parameters": [
           {
@@ -690,6 +742,7 @@
     },
     "/movies/actor/{name}": {
       "get": {
+        "tags": ["Movie"],
         "description": "Get movies by actor name.",
         "parameters": [
           {
@@ -714,6 +767,7 @@
     },
     "/review/{reviewId}": {
       "get": {
+        "tags": ["Review"],
         "description": "Retrieve a review by review ID.",
         "parameters": [
           {
@@ -741,6 +795,7 @@
     },
     "/user/{userId}": {
       "get": {
+        "tags": ["User"],
         "description": "Retrieve user details by user ID.",
         "parameters": [
           {
@@ -765,6 +820,7 @@
     },
     "/movie/{movieId}": {
       "get": {
+        "tags": ["Movie"],
         "description": "Retrieve movie details by movie ID.",
         "parameters": [
           {
@@ -789,6 +845,7 @@
     },
     "/update/{reviewId}": {
       "put": {
+        "tags": ["Review"],
         "description": "Update a review by review ID.",
         "parameters": [
           {
@@ -834,6 +891,7 @@
     },
     "/delete/{reviewId}": {
       "delete": {
+        "tags": ["Review"],
         "description": "Delete a review by review ID.",
         "parameters": [
           {

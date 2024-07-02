@@ -113,7 +113,7 @@ async function updateActor(req, res) {
     });
 
     res
-      .status(200)
+      .status(204)
       .json({ message: "Actor updated successfully", updatedActor });
   } catch (err) {
     res.status(500).json({ message: `Error updating actor: ${err.message}` });
