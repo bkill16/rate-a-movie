@@ -4,10 +4,10 @@
 GET http://localhost:8080/actors
 
 ### getActorById
-GET http://localhost:8080/actors/667ca138ea8a0e7bbff67a0a
+GET http://localhost:8080/actors/667ca138ea8a0e7bbff67a
 
 ### getActorByName
-GET http://localhost:8080/actors/name/liam%20neeson
+GET http://localhost:8080/actors/name/lo
 
 ### getCastByMovieTitle
 GET http://localhost:8080/actors/movie/revenge%20of%20the%20sith
@@ -17,10 +17,10 @@ POST http://localhost:8080/actors
 Content-Type: application/json
 
 {
-    "name": "Nicolas Cage",
-    "gender": "Male",
-    "dob": "1964-01-07",
-    "dod": null,
+    "name": "",
+    "gender": "girafffe",
+    "dob": "august 1, 1964",
+    "dod": "",
     "nationality": "American"
 }
 
