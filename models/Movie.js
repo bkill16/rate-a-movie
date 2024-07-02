@@ -23,7 +23,7 @@ const movieSchema = new mongoose.Schema(
       required: true,
     },
     running_time: {
-      type: Number,
+      type: String,
       required: true,
     },
     audience_rating: {

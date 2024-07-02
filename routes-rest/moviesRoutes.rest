@@ -30,21 +30,21 @@ Content-Type: application/json
 }
 
 ### updateMovie
-PUT http://localhost:8080/movies/667ee16e8cd426baf8fabde4
+PUT http://localhost:8080/movies/667b1de0f592b5c99c067fc6
 Content-Type: application/json
 
 {
-    "title": "Awesome Movie",
-    "director": "Cool release date",
-    "production_company": "Cool production company",
-    "distribution_company": "Cool distribution company",
-    "US_release_date": "1999-05-19T06:00:00.000Z",
-    "running_time": "999",
+    "title": "Star Wars: A New Hope (Episode IV)",
+    "director": "George Lucas",
+    "production_company": "Lucasfilm Ltd.",
+    "distribution_company": "20th Century Fox",
+    "US_release_date": "1977-05-25T06:00:00.000Z",
+    "running_time": "125 minutes",
     "audience_rating": "PG"
 }
 
 ### deleteMovie
-DELETE http://localhost:8080/movies/667ee16e8cd426baf8fabde4
+DELETE http://localhost:8080/movies/6680768c7fc4dda1ed3f65a8
 
 // render
 
