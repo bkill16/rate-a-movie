@@ -8,13 +8,13 @@ POST http://localhost:8080/movie-actors
 Content-Type: application/json
 
 {
-    "movieId": "667b1de0f592b5c99c067fc3",
-    "actorId": "667ca138ea8a0e7bbff67a0a",
-    "role": "Joe"
+    "movieId": "667b1de0f592b5c99c067",
+    "actorId": "667ca138ea8a0e",
+    "role": ""
 }
 
 ### updateRelationship
-PUT http://localhost:8080/movie-actors/667ee1bf8cd426baf8fabded
+PUT http://localhost:8080/movie-actors/667e
 Content-Type: application/json
 
 {
@@ -24,7 +24,7 @@ Content-Type: application/json
 }
 
 ### deleteRelationship
-DELETE http://localhost:8080/movie-actors/667ee1bf8cd426baf8fabded
+DELETE http://localhost:8080/movie-actors/667ee1
 
 // render
 
