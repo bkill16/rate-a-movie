@@ -1,7 +1,8 @@
 const router = require("express").Router();
 const actorsController = require("../controllers/actors");
-const { objectIdValidationRules, validateObjectId } = require("../validation/objectIdValidator");
-const { actorValidationRules, validateActor } = require("../validation/actorValidator");
+const { objectIdValidationRules, validateObjectId } = require("../util/validation/objectIdValidator");
+const { actorValidationRules, validateActor } = require("../util/validation/actorValidator");
+
 
 router.get("/name/:name", actorsController.getActorByName);
 router.get("/movie/:title", actorsController.getCastByMovieTitle);

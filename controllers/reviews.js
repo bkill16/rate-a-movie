@@ -2,6 +2,7 @@ const Review = require('../models/Reviews');
 const Movie = require('../models/Movie');
 const mongoose = require('mongoose');
 
+
 const getAllReviews = async (req, res) => {
     try {
         res.setHeader("Access-Control-Allow-Origin", "*");
@@ -106,45 +107,28 @@ const updateReview = async (req, res) => {
         const { reviewId } = req.params;
         const { movie_id, rating, comment } = req.body;
 
-        console.log(`Attempting to update review with ID: ${reviewId}`);
-
-        // Check if reviewId is valid
+        // Validate reviewId
         if (!mongoose.Types.ObjectId.isValid(reviewId)) {
             return res.status(400).json({ message: 'Invalid review ID.' });
         }
 
-        // Check if rating and comment are present
-        if (!rating || !comment) {
-            return res.status(400).json({ message: "Rating and comment are required." });
-        }
-
-        // Prepare update object
-        const updateObj = { rating, comment };
-        if (movie_id) {
-            if (!mongoose.Types.ObjectId.isValid(movie_id)) {
-                return res.status(400).json({ message: 'Invalid movie ID.' });
-            }
-            updateObj.movie_id = movie_id;
-        }
-
+        const updateObj = { movie_id, rating, comment };
         const updatedReview = await Review.findByIdAndUpdate(
             reviewId,
-            updateObj,
+            { $set: updateObj },
             { new: true, runValidators: true }
         );
 
         if (!updatedReview) {
-            console.log(`No review found with ID: ${reviewId}`);
             return res.status(404).json({ message: 'Review not found for update.' });
         }
 
-        console.log(`Successfully updated review with ID: ${reviewId}`);
         res.json(updatedReview);
     } catch (error) {
-        console.error(`Error updating review: ${error.message}`);
         res.status(500).json({ message: error.message || "Some error occurred while updating the review." });
     }
 };
+
 
 const deleteReview = async (req, res) => {
     try {

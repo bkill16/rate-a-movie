@@ -1,7 +1,8 @@
 const router = require("express").Router();
 const maController = require("../controllers/movieActors");
-const { objectIdValidationRules, validateObjectId } = require("../validation/objectIdValidator");
-const { maValidationRules, validateMA } = require("../validation/movieActorValidator")
+const { objectIdValidationRules, validateObjectId } = require("../util/validation/objectIdValidator");
+const { maValidationRules, validateMA } = require("../util/validation/movieActorValidator")
+
 
 router.get("/", maController.getAllRelationships);
 router.post("/", maValidationRules, validateMA, maController.createRelationship);
