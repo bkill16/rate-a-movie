@@ -8,9 +8,9 @@ POST http://localhost:8080/movie-actors
 Content-Type: application/json
 
 {
-    "movieId": "667b1de0f592b5c99c067",
-    "actorId": "667ca138ea8a0e",
-    "role": ""
+    "movieId": "667b1de0f592b5c99c067fc3",
+    "actorId": "667ca138ea8a0e7bbff67a0a",
+    "role": "joe"
 }
 
 ### updateRelationship

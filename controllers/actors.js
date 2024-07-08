@@ -28,16 +28,16 @@ async function getActorById(req, res) {
 
 async function getActorByName(req, res) {
   try {
-    const actorName = req.params.name;
-    const actor = await Actor.find({ name: new RegExp(actorName, "i") });
+    const actorName = decodeURIComponent(req.params.name);
+    const actors = await Actor.find({ name: new RegExp(actorName, "i") });
 
-    if (!actor) {
-      return res.status(404).json({ message: "Actor not found" });
+    if (actors.length === 0) {
+      return res.status(404).json({ message: "No actors found" });
     }
 
-    res.status(200).json(actor);
+    res.status(200).json(actors);
   } catch (err) {
-    res.status(500).json({ message: `Error fetching actor: ${err.message} ` });
+    res.status(500).json({ message: `Error fetching actors: ${err.message}` });
   }
 }
 
@@ -112,9 +112,11 @@ async function updateActor(req, res) {
       new: true,
     });
 
-    res
-      .status(204)
-      .json({ message: "Actor updated successfully", updatedActor });
+    if (!updatedActor) {
+      return res.status(404).json({ message: "Actor not found" });
+    }
+
+    res.status(204).end();
   } catch (err) {
     res.status(500).json({ message: `Error updating actor: ${err.message}` });
   }
@@ -129,10 +131,9 @@ async function deleteActor(req, res) {
       return res.status(404).json({ message: "Actor not found" });
     }
 
-    const deletedActor = await Actor.findByIdAndDelete(actorId);
-    res
-      .status(204)
-      .json({ message: "Actor deleted successfully", deletedActor });
+    await Actor.findByIdAndDelete(actorId);
+
+    res.status(204).end();
   } catch (err) {
     res.status(500).json({ message: `Error deleting actor: ${err.message}` });
   }
