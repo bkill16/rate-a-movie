@@ -17,15 +17,15 @@ POST http://localhost:8080/actors
 Content-Type: application/json
 
 {
-    "name": "",
-    "gender": "girafffe",
-    "dob": "august 1, 1964",
-    "dod": "",
+    "name": "John Doe",
+    "gender": "Male",
+    "dob": "1954-08-01T00:00:00.000Z",
+    "dod": null,
     "nationality": "American"
 }
 
 ### updateActor
-PUT http://localhost:8080/actors/667ee11a8cd426baf8fabdd6
+PUT http://localhost:8080/actors/668c321f7803f43f8bb3f99d
 Content-Type: application/json
 
 {
@@ -37,7 +37,7 @@ Content-Type: application/json
 }
 
 ### deleteActor
-DELETE http://localhost:8080/actors/667ee11a8cd426baf8fabdd6
+DELETE http://localhost:8080/actors/668c321f7803f43f8bb3f99d
 
 // render
 
@@ -51,7 +51,7 @@ GET https://rate-a-movie.onrender.com/actors/667c895d4f0e4e74a12a8e11
 GET https://rate-a-movie.onrender.com/actors/name/liam%20neeson
 
 ### getCastByMovieTitle
-GET https://rate-a-movie.onrender.com/actors/movie/revenge%20of%20the%20sith
+GET https://rate-a-movie.onrender.com/actors/movie/revenge
 
 ### createActor
 POST https://rate-a-movie.onrender.com/actors

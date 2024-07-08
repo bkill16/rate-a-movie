@@ -5,11 +5,9 @@ async function getAllRelationships(req, res) {
     const movieActors = await MovieActor.find();
     res.status(200).json(movieActors);
   } catch (err) {
-    res
-      .status(500)
-      .json({
-        message: `Error fetching movie actor relationships: ${err.message}`,
-      });
+    res.status(500).json({
+      message: `Error fetching movie actor relationships: ${err.message}`,
+    });
   }
 }
 
@@ -24,18 +22,14 @@ async function createRelationship(req, res) {
     });
 
     const savedMovieActor = await newMovieActor.save();
-    res
-      .status(201)
-      .json({
-        message: "Movie actor relationship created successfully",
-        savedMovieActor,
-      });
+    res.status(201).json({
+      message: "Movie actor relationship created successfully",
+      savedMovieActor,
+    });
   } catch (err) {
-    res
-      .status(400)
-      .json({
-        message: `Error creating movie actor relationship: ${err.message}`,
-      });
+    res.status(400).json({
+      message: `Error creating movie actor relationship: ${err.message}`,
+    });
   }
 }
 
@@ -59,18 +53,15 @@ async function updateRelationship(req, res) {
       }
     );
 
-    res
-      .status(204)
-      .json({
-        message: "Movie actor relationship updated successfully",
-        updatedRelationship,
-      });
+    if (!updatedRelationship) {
+      return res.status(404).json({ message: "Actor not found" });
+    }
+
+    res.status(204).end();
   } catch (err) {
-    res
-      .status(500)
-      .json({
-        message: `Error updating movie actor relationship: ${err.message}`,
-      });
+    res.status(500).json({
+      message: `Error updating movie actor relationship: ${err.message}`,
+    });
   }
 }
 
@@ -85,18 +76,13 @@ async function deleteRelationship(req, res) {
         .json({ message: "Movie actor relationship not found" });
     }
 
-    const deletedRelationship = await MovieActor.findByIdAndDelete(
-      relationshipId
-    );
-    res
-      .status(204)
-      .json({ message: "Movie actor relationship deleted successfully" });
+    await MovieActor.findByIdAndDelete(relationshipId);
+
+    res.status(204).end();
   } catch (err) {
-    res
-      .status(500)
-      .json({
-        message: `Error deleting movie actor relationship: ${err.message}`,
-      });
+    res.status(500).json({
+      message: `Error deleting movie actor relationship: ${err.message}`,
+    });
   }
 }
 
