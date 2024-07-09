@@ -2,14 +2,18 @@
   "name": "rate-a-movie",
   "version": "1.0.0",
   "main": "server.js",
+  "description": "This product was created as part of our final college project for CSE 341. We created an API for a blog about movies and reviews.",
   "scripts": {
     "start": "nodemon server.js",
-    "swagger-autogen": "node swagger-generate.js"
+    "swagger-autogen": "node swagger-generate.js",
+    "test": "jest"
+
   },
   "keywords": [],
-  "author": "",
+  "author": " Ross Gardner, Brenleigh Killpack, Tyrone Martin, and Leo Vidal",
   "license": "ISC",
   "devDependencies": {
+    "jest": "^29.7.0",
     "nodemon": "^3.1.4"
   },
   "dependencies": {
@@ -19,6 +23,5 @@
     "mongoose": "^8.4.3",
     "swagger-autogen": "^2.23.7",
     "swagger-ui-express": "^5.0.1"
-  },
-  "description": ""
+  }
 }
