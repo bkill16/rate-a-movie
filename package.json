@@ -6,26 +6,17 @@
   "scripts": {
     "start": "nodemon server.js",
     "swagger-autogen": "node swagger-generate.js",
-<<<<<<< HEAD
     "test": "jest"
-
-=======
-    "test": "cross-env NODE_ENV=test jest --detectOpenHandles"
->>>>>>> 7f64239c374cfc40b38254794ffcc569d844120c
   },
   "keywords": [],
-  "author": " Ross Gardner, Brenleigh Killpack, Tyrone Martin, and Leo Vidal",
+  "author": "Ross Gardner, Brenleigh Killpack, Tyrone Martin, and Leo Vidal",
   "license": "ISC",
   "devDependencies": {
-<<<<<<< HEAD
     "jest": "^29.7.0",
     "nodemon": "^3.1.4"
-=======
-    "cross-env": "^7.0.3",
-    "jest": "^29.7.0",
-    "nodemon": "^3.1.4",
-    "supertest": "^7.0.0"
->>>>>>> 7f64239c374cfc40b38254794ffcc569d844120c
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "dependencies": {
     "dotenv": "^16.4.5",
@@ -34,12 +25,8 @@
     "mongoose": "^8.4.3",
     "swagger-autogen": "^2.23.7",
     "swagger-ui-express": "^5.0.1"
-<<<<<<< HEAD
-=======
   },
-  "description": "",
-  "jest": {
-    "testEnvironment": "node"
->>>>>>> 7f64239c374cfc40b38254794ffcc569d844120c
+  "directories": {
+    "test": "tests"
   }
 }
