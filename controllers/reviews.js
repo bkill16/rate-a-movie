@@ -130,12 +130,28 @@ const updateReview = async (req, res) => {
 };
 
 
+// const deleteReview = async (req, res) => {
+//     try {
+//         if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+//             return res.status(400).json({ message: 'Must use a valid review id to delete a review.' });
+//         }
+//         const deletedReview = await Review.findByIdAndDelete(req.params.id);
+//         if (!deletedReview) {
+//             return res.status(404).json({ message: 'Review not found' });
+//         }
+//         res.status(204).send();
+//     } catch (error) {
+//         res.status(500).json({ message: error.message || "Some error occurred while deleting the review." });
+//     }
+// };
+
 const deleteReview = async (req, res) => {
     try {
-        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+        const { reviewId } = req.params;
+        if (!mongoose.Types.ObjectId.isValid(reviewId)) {
             return res.status(400).json({ message: 'Must use a valid review id to delete a review.' });
         }
-        const deletedReview = await Review.findByIdAndDelete(req.params.id);
+        const deletedReview = await Review.findByIdAndDelete(reviewId);
         if (!deletedReview) {
             return res.status(404).json({ message: 'Review not found' });
         }
