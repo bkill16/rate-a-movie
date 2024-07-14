@@ -1,44 +1,25 @@
-const router = require('express').Router();
+const express = require('express');
+const router = express.Router();
+const { requiresAuth } = require('express-openid-connect');
+const usersController = require('../controllers/users');
+const { updateUserValidationRules, validateUpdateUser } = require('../util/validation/userValidator');
 
+// POST /users
+router.post('/', requiresAuth(), usersController.createUser);
 
-// POST /user
-router.post("/", (req, res) => {
-    // Logic to create a new user
-    res.send("User created");
-  });
-  
-  // GET /user/login
-  router.get("/login", (req, res) => {
-    // Logic for user login
-    res.send("User login");
-  });
-  
-  // GET /user/logout
-  router.get("/logout", (req, res) => {
-    // Logic for user logout
-    res.send("User logout");
-  });
-  
-  // GET /user/{id}
-  router.get("/:id", (req, res) => {
-    const { id } = req.params;
-    // Logic to get a user by ID
-    res.send(`User details for ID: ${id}`);
-  });
-  
-  // PUT /user/{id}
-  router.put("/:id", (req, res) => {
-    const { id } = req.params;
-    // Logic to update a user by ID
-    res.send(`User with ID: ${id} updated`);
-  });
-  
-  // DELETE /user/{id}
-  router.delete("/:id", (req, res) => {
-    const { id } = req.params;
-    // Logic to delete a user by ID
-    res.send(`User with ID: ${id} deleted`);
-  });
-  
+// GET /users/login
+router.get('/login', usersController.loginUser);
+
+// GET /users/logout
+router.get('/logout', usersController.logoutUser);
+
+// GET /users/profile
+router.get('/profile', requiresAuth(), usersController.getUserProfile);
+
+// PUT /users/:id
+router.put('/:id', requiresAuth(), updateUserValidationRules, validateUpdateUser, usersController.updateUserById);
+
+// DELETE /users/:id
+router.delete('/:id', requiresAuth(), usersController.deleteUserById);
 
 module.exports = router;
