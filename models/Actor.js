@@ -1,5 +1,3 @@
-// actor validation on the actual actor schema
-
 const mongoose = require("mongoose");
 
 const actorSchema = new mongoose.Schema(

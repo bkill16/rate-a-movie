@@ -1,21 +1,24 @@
 const mongoose = require("mongoose");
 
 const reviewSchema = new mongoose.Schema({
-
   movie_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "movies",
-    required: true
+    required: [true, "Movie ID is required"]
+  },
+  user_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
   },
   rating: {
     type: Number,
-    required: true,
-    min: 1,
-    max: 5
+    required: [true, "Rating is required"],
+    min: [1, "Rating must be at least 1"],
+    max: [5, "Rating must be at most 5"]
   },
   comment: {
     type: String,
-    required: true
+    required: [true, "Comment is required"]
   },
   date: {
     type: Date,

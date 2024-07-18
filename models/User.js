@@ -1,21 +1,19 @@
-// models/User.js
-
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
   auth0Id: {
     type: String,
-    required: true,
+    required: [true, "Auth0 ID is required"],
     unique: true,
   },
   email: {
     type: String,
-    required: true,
+    required: [true, "Email is required"],
     unique: true,
   },
   name: {
     type: String,
-    required: true,
+    required: [true, "Name is required"],
   },
   createdAt: {
     type: Date,

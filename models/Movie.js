@@ -4,31 +4,31 @@ const movieSchema = new mongoose.Schema(
   {
     title: {
       type: String,
-      required: true,
+      required: [true, "Title is required"],
     },
     director: {
       type: String,
-      required: true,
+      required: [true, "Director is required"],
     },
     production_company: {
       type: String,
-      required: true,
+      required: [true, "Production company is required"],
     },
     distribution_company: {
       type: String,
-      required: true,
+      required: [true, "Distribution company is required"],
     },
     US_release_date: {
       type: Date,
-      required: true,
+      required: [true, "US release date is required"],
     },
     running_time: {
       type: String,
-      required: true,
+      required: [true, "Running time is required"],
     },
     audience_rating: {
       type: String,
-      required: true,
+      required: [true, "Audience rating is required"],
     },
   },
   { versionKey: false }
