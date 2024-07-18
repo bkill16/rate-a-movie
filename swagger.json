@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Movies API",
-    "description": "API documentation for the Movies blog for Rate-a-Movie, with moves, users, actors, and Reviews.",
+    "description": "API documentation for the Movies blog for Rate-a-Movie, with movies, users, actors, and reviews.",
     "version": "1.0.0"
   },
   "host": "rate-a-movie.onrender.com",

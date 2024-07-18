@@ -7,11 +7,13 @@ const { reviewValidationRules, validateReview } = require('../util/validation/re
 router.get('/', reviewsController.getAllReviews);
 router.get('/:reviewId', reviewsController.getSingleReview);
 router.get('/title/:title', reviewsController.getReviewsByTitle);
+router.get('/user/:userId', reviewsController.getReviewsByUserId);
 
 // Routes with validation
 router.post('/', reviewValidationRules, validateReview, reviewsController.createNewReview);
 router.put('/:reviewId', reviewValidationRules, validateReview, reviewsController.updateReview);
 
-router.delete('/:reviewId', reviewsController.deleteReview);
+// Delete a review by ID
+router.delete('/:reviewId', reviewsController.deleteReview);  
 
 module.exports = router;
