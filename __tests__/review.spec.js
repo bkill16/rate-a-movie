@@ -15,7 +15,7 @@ let app;
 beforeAll(async () => {
   app = await startServer();
   await mongoose.connect(MONGODB_TEST_URI);
-  server = app.listen(8081);
+  server = app.listen(8085);
 });
 
 afterEach(async () => {
