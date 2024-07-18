@@ -20,7 +20,7 @@ beforeAll(async () => {
   app.use("/", routes);
 
   await connectDB();
-  server = app.listen(8081);
+  server = app.listen(8082);
 });
 
 afterAll(async () => {
