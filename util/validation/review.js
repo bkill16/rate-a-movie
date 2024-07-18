@@ -18,8 +18,8 @@ const reviewValidationRules = [
     .withMessage("Comment is required")
     .isString()
     .withMessage("Comment must be a string")
-    .isLength({ min: 10 })
-    .withMessage("Comment must be at least 10 characters long"),
+    .isLength({ min: 3 })
+    .withMessage("Comment must be at least 3 characters long"),
 ];
 
 const validateReview = (req, res, next) => {
