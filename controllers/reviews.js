@@ -67,33 +67,28 @@ const getReviewsByTitle = async (req, res) => {
 
 
 
-// const getReviewsByUserId = async (req, res) => {
-//     try {
-//         res.setHeader("Access-Control-Allow-Origin", "*");
-//         if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-//             return res.status(400).json({ message: 'Must use a valid user id to get reviews.' });
-//         }
-//         const reviews = await Review.find({ user_id: req.params.id });
-//         res.json(reviews);
-//     } catch (error) {
-//         res.status(500).json({ message: error.message || "Some error occurred while getting reviews by user ID." });
-//     }
-// };
+const getReviewsByUserId = async (req, res) => {
+    try {
+        res.setHeader("Access-Control-Allow-Origin", "*");
+        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+            return res.status(400).json({ message: 'Must use a valid user id to get reviews.' });
+        }
+        const reviews = await Review.find({ user_id: req.params.id });
+        res.json(reviews);
+    } catch (error) {
+        res.status(500).json({ message: error.message || "Some error occurred while getting reviews by user ID." });
+    }
+};
 
 const createNewReview = async (req, res) => {
     try {
-        const { movie_id, rating, comment } = req.body;
+        const { movie_id, rating, comment, user_id } = req.body;  // Include user_id
 
-        // Check if movie_id, rating, and comment are present
-        if (!movie_id || !rating || !comment) {
-            return res.status(400).json({ message: "Movie ID, rating, and comment are required." });
+        if (!movie_id || !rating || !comment || !user_id) {
+            return res.status(400).json({ message: "Movie ID, rating, comment, and user ID are required." });
         }
 
-        const review = new Review({
-            movie_id: movie_id,
-            rating: rating,
-            comment: comment
-        });
+        const review = new Review({ movie_id, user_id, rating, comment });  // Include user_id in the new review
 
         const savedReview = await review.save();
         res.status(201).json(savedReview);
@@ -101,6 +96,7 @@ const createNewReview = async (req, res) => {
         res.status(500).json({ message: error.message || "Some error occurred while creating the review." });
     }
 };
+
 
 const updateReview = async (req, res) => {
     try {
@@ -130,21 +126,6 @@ const updateReview = async (req, res) => {
 };
 
 
-// const deleteReview = async (req, res) => {
-//     try {
-//         if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-//             return res.status(400).json({ message: 'Must use a valid review id to delete a review.' });
-//         }
-//         const deletedReview = await Review.findByIdAndDelete(req.params.id);
-//         if (!deletedReview) {
-//             return res.status(404).json({ message: 'Review not found' });
-//         }
-//         res.status(204).send();
-//     } catch (error) {
-//         res.status(500).json({ message: error.message || "Some error occurred while deleting the review." });
-//     }
-// };
-
 const deleteReview = async (req, res) => {
     try {
         const { reviewId } = req.params;
@@ -164,7 +145,7 @@ const deleteReview = async (req, res) => {
 module.exports = {
     getAllReviews,
     getSingleReview,
-    // getReviewsByUserId,
+    getReviewsByUserId,
     getReviewsByTitle,
     createNewReview,
     updateReview,

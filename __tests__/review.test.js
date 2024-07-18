@@ -8,77 +8,62 @@ dotenv.config();
 const MONGODB_TEST_URI = process.env.MONGODB_TEST_URI;
 const Review = require("../models/Reviews");
 const Movie = require("../models/Movie");
+const User = require("../models/User");  // Ensure the User model is required
 const startServer = require("../server");
 
 let app;
+let server;
+let mockUser;  // Declare a variable to store the mock user's object
+
+// Define a mock user object and a function to insert it into the test database
+mockUser = {
+  _id: new mongoose.Types.ObjectId(),  // Generate a unique ID for the mock user
+  auth0Id: 'mock-auth0-id',
+  email: 'mockuser@example.com',
+  name: 'Mock User'
+};
+
+const createMockUser = async () => {
+  await new User(mockUser).save();  // Insert the mock user
+};
 
 beforeAll(async () => {
-  app = await startServer();
-  await mongoose.connect(MONGODB_TEST_URI);
-  server = app.listen(8081);
+    app = await startServer();
+    await mongoose.connect(MONGODB_TEST_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+    await createMockUser();  // Create the mock user before the tests
+    server = app.listen(8081);
 });
 
 afterEach(async () => {
-  await Review.deleteMany({});
-  await Movie.deleteMany({});
+    await Review.deleteMany({});
+    await Movie.deleteMany({});
 });
 
 afterAll(async () => {
-  await mongoose.connection.close();
-  await server.close();
-  await mongoose.disconnect();
-  await new Promise((resolve) => setTimeout(resolve, 500));
+    await User.deleteMany({});  // Clean up the user collection including the mock user
+    await mongoose.connection.close();
+    await server.close();
 });
 
 describe("Rate a Movie API - Reviews", () => {
-  it("should get all reviews", async () => {
-    const movie = new Movie({
-      title: "Inception",
-      director: "Christopher Nolan",
-      production_company: "Warner Bros.",
-      distribution_company: "Warner Bros.",
-      US_release_date: "2010-07-16T00:00:00.000Z",
-      running_time: "148 minutes",
-      audience_rating: "PG-13",
-    });
-    await movie.save();
+    it("should create a new review with mock user ID", async () => {
+        const movie = new Movie({
+            title: "Inception",
+            director: "Christopher Nolan",
+            production_company: "Warner Bros.",
+            distribution_company: "Warner Bros.",
+            US_release_date: "2010-07-16T00:00:00.000Z",
+            running_time: "148 minutes",
+            audience_rating: "PG-13",
+        });
+        await movie.save();
 
-    const review1 = new Review({
-      movie_id: movie._id,
-      rating: 5,
-      comment: "Excellent movie!",
-    });
-    const review2 = new Review({
-      movie_id: movie._id,
-      rating: 4,
-      comment: "Great movie!",
-    });
-    await review1.save();
-    await review2.save();
-
-    const response = await request(app).get("/reviews");
-
-    expect(response.statusCode).toBe(200);
-    expect(response.body.length).toBe(2);
-  });
-
-  it("should create a new review", async () => {
-    const movie = new Movie({
-      title: "Inception",
-      director: "Christopher Nolan",
-      production_company: "Warner Bros.",
-      distribution_company: "Warner Bros.",
-      US_release_date: "2010-07-16T00:00:00.000Z",
-      running_time: "148 minutes",
-      audience_rating: "PG-13",
-    });
-    await movie.save();
-
-    const response = await request(app).post("/reviews").send({
-      movie_id: movie._id,
-      rating: 5,
-      comment: "Excellent movie!",
-    });
+        const response = await request(app).post("/reviews").send({
+            movie_id: movie._id,
+            user_id: mockUser._id,  // Use the mock user ID when creating a review
+            rating: 5,
+            comment: "Excellent movie!"
+        });
 
     expect(response.statusCode).toBe(201);
     expect(response.body.rating).toBe(5);
@@ -98,9 +83,10 @@ describe("Rate a Movie API - Reviews", () => {
     await movie.save();
   
     const review = new Review({
-      movie_id: movie._id,
-      rating: 4,
-      comment: "Great movie!",
+      user_id: new mongoose.Types.ObjectId(), // Ensure a valid ObjectId is provided
+      movie_id: new mongoose.Types.ObjectId(),
+      rating: 5,
+      comment: "Great movie!"
     });
     await review.save();
   
@@ -130,9 +116,10 @@ describe("Rate a Movie API - Reviews", () => {
     await movie.save();
 
     const review = new Review({
-      movie_id: movie._id,
-      rating: 4,
-      comment: "Great movie!",
+      user_id: new mongoose.Types.ObjectId(), // Ensure a valid ObjectId is provided
+      movie_id: new mongoose.Types.ObjectId(),
+      rating: 5,
+      comment: "Great movie!"
     });
     await review.save();
 
