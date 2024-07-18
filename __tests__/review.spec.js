@@ -28,10 +28,16 @@ const createMockUser = async () => {
 };
 
 beforeAll(async () => {
+<<<<<<< HEAD:__tests__/review.test.js
     app = await startServer();
     await mongoose.connect(MONGODB_TEST_URI, { useNewUrlParser: true, useUnifiedTopology: true });
     await createMockUser();  // Create the mock user before the tests
     server = app.listen(8081);
+=======
+  app = await startServer();
+  await mongoose.connect(MONGODB_TEST_URI);
+  server = app.listen(8085);
+>>>>>>> 2863c88d16a579a9d1355e4e532b4380650df608:__tests__/review.spec.js
 });
 
 afterEach(async () => {
