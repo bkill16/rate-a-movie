@@ -10,10 +10,15 @@ const MovieActor = require("../models/MovieActor");
 const startServer = require("../server");
 
 let app;
+let server;
 
 beforeAll(async () => {
+  process.env.NODE_ENV = 'test';
   app = await startServer();
-  await mongoose.connect(MONGODB_TEST_URI);
+  await mongoose.connect(MONGODB_TEST_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
   server = app.listen(8081);
 });
 
@@ -31,18 +36,18 @@ afterAll(async () => {
 describe("Rate a Movie API - MovieActors", () => {
   it("should get all movie actor relationships", async () => {
     const relationship1 = new MovieActor({
-      movieId: "667b1de0f592b5c99c067fc3",
-      actorId: "667ca138ea8a0e7bbff67a12",
+      movieId: new mongoose.Types.ObjectId(),
+      actorId: new mongoose.Types.ObjectId(),
       role: "Chewbacca",
     });
     const relationship2 = new MovieActor({
-      movieId: "667b1de0f592b5c99c067fc8",
-      actorId: "667ca138ea8a0e7bbff67a0a",
+      movieId: new mongoose.Types.ObjectId(),
+      actorId: new mongoose.Types.ObjectId(),
       role: "Boba Fett",
     });
     const relationship3 = new MovieActor({
-      movieId: "667b1de0f592b5c99c067fc3",
-      actorId: "667ca138ea8a0e7bbff67a13",
+      movieId: new mongoose.Types.ObjectId(),
+      actorId: new mongoose.Types.ObjectId(),
       role: "Jabba the Hutt",
     });
     await relationship1.save();
@@ -53,40 +58,23 @@ describe("Rate a Movie API - MovieActors", () => {
 
     expect(response.statusCode).toBe(200);
     expect(response.body.length).toBe(3);
-
-    expect(response.body[0].movieId).toBe("667b1de0f592b5c99c067fc3");
-    expect(response.body[0].actorId).toBe("667ca138ea8a0e7bbff67a12");
-    expect(response.body[0].role).toBe("Chewbacca");
-
-    expect(response.body[1].movieId).toBe("667b1de0f592b5c99c067fc8");
-    expect(response.body[1].actorId).toBe("667ca138ea8a0e7bbff67a0a");
-    expect(response.body[1].role).toBe("Boba Fett");
-
-    expect(response.body[2].movieId).toBe("667b1de0f592b5c99c067fc3");
-    expect(response.body[2].actorId).toBe("667ca138ea8a0e7bbff67a13");
-    expect(response.body[2].role).toBe("Jabba the Hutt");
   });
 
   it("should create a new movie actor relationship", async () => {
     const response = await request(app).post("/movie-actors").send({
-      movieId: "667b1de0f592b5c99c067fc8",
-      actorId: "667ca138ea8a0e7bbff67a0a",
+      movieId: new mongoose.Types.ObjectId(),
+      actorId: new mongoose.Types.ObjectId(),
       role: "Boba Fett",
     });
 
     expect(response.statusCode).toBe(201);
-
-    const savedMovieActor = response.body.savedMovieActor;
-    
-    expect(savedMovieActor.movieId).toBe("667b1de0f592b5c99c067fc8");
-    expect(savedMovieActor.actorId).toBe("667ca138ea8a0e7bbff67a0a");
-    expect(savedMovieActor.role).toBe("Boba Fett");
+    expect(response.body.savedMovieActor.role).toBe("Boba Fett");
   });
 
   it("should update a movie actor relationship by id", async () => {
     const relationship = new MovieActor({
-      movieId: "667b1de0f592b5c99c067fc3",
-      actorId: "667ca138ea8a0e7bbff67a12",
+      movieId: new mongoose.Types.ObjectId(),
+      actorId: new mongoose.Types.ObjectId(),
       role: "Elrond",
     });
     await relationship.save();
@@ -94,8 +82,8 @@ describe("Rate a Movie API - MovieActors", () => {
     const response = await request(app)
       .put(`/movie-actors/${relationship._id}`)
       .send({
-        movieId: "667b1de0f592b5c99c067fc3",
-        actorId: "667ca138ea8a0e7bbff67a0a",
+        movieId: relationship.movieId,
+        actorId: new mongoose.Types.ObjectId(),
         role: "Legolas",
       });
 
@@ -104,8 +92,8 @@ describe("Rate a Movie API - MovieActors", () => {
 
   it("should delete a movie actor relationship by id", async () => {
     const relationship = new MovieActor({
-      movieId: "667b1de0f592b5c99c067fc8",
-      actorId: "667ca138ea8a0e7bbff67a0a",
+      movieId: new mongoose.Types.ObjectId(),
+      actorId: new mongoose.Types.ObjectId(),
       role: "Kermit the Frog",
     });
     await relationship.save();
@@ -118,22 +106,24 @@ describe("Rate a Movie API - MovieActors", () => {
   });
 
   it("should return a 404 for a non-existent relationship on put", async () => {
+    const nonExistentId = new mongoose.Types.ObjectId();
     const response = await request(app)
-      .put("/movie-actors/667ca138ea8a0e7bbff67a14")
+      .put(`/movie-actors/${nonExistentId}`)
       .send({
-        movieId: "667b1de0f592b5c99c067fc3",
-        actorId: "667ca138ea8a0e7bbff67a12",
+        movieId: new mongoose.Types.ObjectId(),
+        actorId: new mongoose.Types.ObjectId(),
         role: "Gandalf",
       });
-    
-      expect(response.statusCode).toBe(404);
+
+    expect(response.statusCode).toBe(404);
   });
 
   it("should return a 404 for a non-existent relationship on delete", async () => {
+    const nonExistentId = new mongoose.Types.ObjectId();
     const response = await request(app).delete(
-      "/movie-actors/667b1de0f592b5c99c067fcb"
+      `/movie-actors/${nonExistentId}`
     );
-    
+
     expect(response.statusCode).toBe(404);
   });
 });

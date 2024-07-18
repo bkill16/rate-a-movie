@@ -15,14 +15,18 @@ let app;
 let server;
 
 beforeAll(async () => {
+  process.env.NODE_ENV = 'test';
   app = await startServer();
-  await mongoose.connect(MONGODB_TEST_URI);
+  await mongoose.connect(MONGODB_TEST_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
   server = app.listen(8081);
 });
 
 afterEach(async () => {
-  await Movie.deleteMany({});
   await Actor.deleteMany({});
+  await Movie.deleteMany({});
   await MovieActor.deleteMany({});
 });
 
