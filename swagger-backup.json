@@ -5,13 +5,9 @@
     "description": "API documentation for the Movies blog for Rate-a-Movie, with moves, users, actors, and Reviews.",
     "version": "1.0.0"
   },
-  "host": [
-    "rate-a-movie.onrender.com"
-  ],
+  "host": "rate-a-movie.onrender.com",
   "basePath": "/",
-  "schemes": [
-    "https"
-  ],
+  "schemes": ["https"],
   "tags": [
     {
       "name": "User",
@@ -170,7 +166,7 @@
         }
       }
     },
-    "/reviews/review/{reviewId}": {
+    "/reviews/{reviewId}": {
       "get": {
         "tags": ["Review"],
         "description": "Get a review by ID.",
@@ -196,59 +192,7 @@
             "description": "Internal Server Error"
           }
         }
-      }
-    },
-    "/reviews/user/{userId}": {
-      "get": {
-        "tags": ["Review"],
-        "description": "Get reviews by user ID.",
-        "parameters": [
-          {
-            "name": "userId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/reviews/movie/{movieId}": {
-      "get": {
-        "tags": ["Review"],
-        "description": "Get reviews by movie ID.",
-        "parameters": [
-          {
-            "name": "movieId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/reviews/update/{reviewId}": {
+      },
       "put": {
         "tags": ["Review"],
         "description": "Update a review by ID.",
@@ -265,9 +209,6 @@
             "schema": {
               "type": "object",
               "properties": {
-                "user_id": {
-                  "example": "any"
-                },
                 "movie_id": {
                   "example": "any"
                 },
@@ -282,19 +223,20 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "200": {
+            "description": "OK"
           },
           "400": {
             "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
           }
         }
-      }
-    },
-    "/reviews/delete/{reviewId}": {
+      },
       "delete": {
         "tags": ["Review"],
         "description": "Delete a review by ID.",
@@ -312,6 +254,9 @@
           },
           "400": {
             "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
