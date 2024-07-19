@@ -2,7 +2,6 @@ const Review = require('../models/Reviews');
 const Movie = require('../models/Movie');
 const mongoose = require('mongoose');
 
-
 const getAllReviews = async (req, res) => {
     try {
         res.setHeader("Access-Control-Allow-Origin", "*");
@@ -32,53 +31,58 @@ const getSingleReview = async (req, res) => {
     }
 };
 
-const getReviewsByTitle = async (req, res) => {
-    try {
-        res.setHeader("Access-Control-Allow-Origin", "*");
-        const movieTitle = decodeURIComponent(req.params.title);
-        
-        // Use a more flexible search
-        const movie = await Movie.findOne({ 
-            title: { $regex: new RegExp(movieTitle.split(':')[0], 'i') }
-        });
-        
-        if (!movie) {
-            return res.status(404).json({ message: 'Movie not found' });
-        }
-        
-        // Then, find reviews associated with this movie's ID
-        const reviews = await Review.find({ movie_id: movie._id });
-        
-        if (reviews.length === 0) {
-            return res.status(404).json({ 
-                message: 'No reviews found for this movie',
-                movieTitle: movie.title  // Include the actual movie title in the response
-            });
-        }
-        
-        res.json({
-            movie: movie.title,
-            reviews: reviews
-        });
-    } catch (error) {
-        res.status(500).json({ message: error.message || "Some error occurred while getting reviews by movie title." });
-    }
-};
+// const getReviewsByTitle = async (req, res) => {
+//     try {
+//         res.setHeader("Access-Control-Allow-Origin", "*");
+//         const movieTitle = decodeURIComponent(req.params.title);
 
+//         const movie = await Movie.findOne({ 
+//             title: { $regex: new RegExp(movieTitle.replace(/[:()\s]/g, '.*'), 'i') }
+//         });
 
+//         if (!movie) {
+//             return res.status(404).json({ message: 'Movie not found' });
+//         }
 
-const getReviewsByUserId = async (req, res) => {
-    try {
-        res.setHeader("Access-Control-Allow-Origin", "*");
-        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-            return res.status(400).json({ message: 'Must use a valid user id to get reviews.' });
-        }
-        const reviews = await Review.find({ user_id: req.params.id });
-        res.json(reviews);
-    } catch (error) {
-        res.status(500).json({ message: error.message || "Some error occurred while getting reviews by user ID." });
-    }
-};
+//         const reviews = await Review.find({ movie_id: movie._id });
+
+//         if (reviews.length === 0) {
+//             return res.status(404).json({ 
+//                 message: 'No reviews found for this movie',
+//                 movieTitle: movie.title
+//             });
+//         }
+
+//         res.json({
+//             movie: movie.title,
+//             reviews: reviews
+//         });
+//     } catch (error) {
+//         res.status(500).json({ message: error.message || "Some error occurred while getting reviews by movie title." });
+//     }
+// };
+
+// const getReviewsByUserId = async (req, res) => {
+//     try {
+//         res.setHeader("Access-Control-Allow-Origin", "*");
+//         const { userId } = req.params;
+
+//         if (!mongoose.Types.ObjectId.isValid(userId)) {
+//             return res.status(400).json({ message: 'Must use a valid user id to get reviews.' });
+//         }
+
+//         const reviews = await Review.find({ user_id: userId });
+
+//         if (reviews.length === 0) {
+//             return res.status(404).json({ message: 'No reviews found for this user' });
+//         }
+
+//         res.json(reviews);
+//     } catch (error) {
+//         res.status(500).json({ message: error.message || "Some error occurred while getting reviews by user ID." });
+//     }
+// };
+
 
 const createNewReview = async (req, res) => {
     try {
@@ -146,8 +150,8 @@ const deleteReview = async (req, res) => {
 module.exports = {
     getAllReviews,
     getSingleReview,
-    getReviewsByUserId,
-    getReviewsByTitle,
+    // getReviewsByUserId,
+    // getReviewsByTitle,
     createNewReview,
     updateReview,
     deleteReview
