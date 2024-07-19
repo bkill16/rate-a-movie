@@ -319,6 +319,7 @@
         }
       }
     },
+<<<<<<< HEAD
     "/reviews/title/{title}": {
       "get": {
         "description": "",
@@ -370,6 +371,8 @@
         }
       }
     },
+=======
+>>>>>>> fd93740c4396dcc0a095a290ac7ba3ee53e676c8
     "/actors/name/{name}": {
       "get": {
         "description": "",
@@ -922,6 +925,7 @@
           }
         }
       }
+<<<<<<< HEAD
     },
     "/title/{title}": {
       "get": {
@@ -973,6 +977,8 @@
           }
         }
       }
+=======
+>>>>>>> fd93740c4396dcc0a095a290ac7ba3ee53e676c8
     }
   }
 }
