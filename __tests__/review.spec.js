@@ -1,5 +1,6 @@
 // npm install --save-dev jest supertest
 // to run the tests 'npm test'
+// or to run a single test, npm test -- __tests__/review.spec.js
 
 const request = require("supertest");
 const mongoose = require("mongoose");
@@ -45,30 +46,30 @@ afterAll(async () => {
     await server.close();
 });
 
-describe("Rate a Movie API - Reviews", () => {
-    it("should create a new review with mock user ID", async () => {
-        const movie = new Movie({
-            title: "Inception",
-            director: "Christopher Nolan",
-            production_company: "Warner Bros.",
-            distribution_company: "Warner Bros.",
-            US_release_date: "2010-07-16T00:00:00.000Z",
-            running_time: "148 minutes",
-            audience_rating: "PG-13",
-        });
-        await movie.save();
-
-        const response = await request(app).post("/reviews").send({
-            movie_id: movie._id,
-            user_id: mockUser._id,  // Use the mock user ID when creating a review
-            rating: 5,
-            comment: "Excellent movie!"
-        });
-
-    expect(response.statusCode).toBe(201);
-    expect(response.body.rating).toBe(5);
-    expect(response.body.comment).toBe("Excellent movie!");
+it("should create a new review with mock user ID", async () => {
+  const movie = new Movie({
+      title: "Inception",
+      director: "Christopher Nolan",
+      production_company: "Warner Bros.",
+      distribution_company: "Warner Bros.",
+      US_release_date: "2010-07-16T00:00:00.000Z",
+      running_time: "148 minutes",
+      audience_rating: "PG-13",
   });
+  await movie.save();
+
+  const response = await request(app).post("/reviews").send({
+      movie_id: movie._id,
+      user_id: mockUser._id,  // Use the mock user ID when creating a review
+      rating: 5,
+      comment: "Excellent movie!"
+  });
+
+  expect(response.statusCode).toBe(201);
+  expect(response.body.rating).toBe(5);
+  expect(response.body.comment).toBe("Excellent movie!");
+  expect(response.body.user_id).toBe(mockUser._id.toString());  // Check if the user_id is correctly saved
+});
 
   it("should update a review by ID", async () => {
     const movie = new Movie({
@@ -140,5 +141,4 @@ describe("Rate a Movie API - Reviews", () => {
     const response = await request(app).delete(`/reviews/${nonExistentId}`);
 
     expect(response.statusCode).toBe(404);
-});
 });
