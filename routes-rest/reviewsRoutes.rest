@@ -25,9 +25,10 @@ PUT http://localhost:8080/reviews/66807a8ad26ffd2067994693
 Content-Type: application/json
 
 {
-  "rating": 4,
-  "comment": "This is an updated comment for the movie",
-  "movie_id": "667b1de0f592b5c99c067fc6"
+  "movie_id": "667b1de0f592b5c99c067fc6",
+  "rating": 5,
+  "comment": "Updated comment",
+  "user_id": "669353fd608459133c638757"
 }
 
 
