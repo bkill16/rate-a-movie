@@ -82,13 +82,13 @@ const getReviewsByUserId = async (req, res) => {
 
 const createNewReview = async (req, res) => {
     try {
-        const { movie_id, rating, comment, user_id } = req.body;  // Include user_id
+        const { movie_id, rating, comment, user_id } = req.body;
 
         if (!movie_id || !rating || !comment || !user_id) {
             return res.status(400).json({ message: "Movie ID, rating, comment, and user ID are required." });
         }
 
-        const review = new Review({ movie_id, user_id, rating, comment });  // Include user_id in the new review
+        const review = new Review({ movie_id, user_id, rating, comment });
 
         const savedReview = await review.save();
         res.status(201).json(savedReview);

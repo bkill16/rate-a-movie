@@ -9,7 +9,7 @@ const reviewSchema = new mongoose.Schema({
   user_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
-    required: [true, "User ID is required"]  // Ensure this field is now required
+    required: [true, "User ID is required"]
   },
   rating: {
     type: Number,
@@ -25,7 +25,7 @@ const reviewSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   }
-}, { versionKey: false });
+}, { versionKey: false }); // Disable __v field in MongoDB documents
 
 const Review = mongoose.model("reviews", reviewSchema);
 
