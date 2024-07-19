@@ -15,11 +15,13 @@ const getAllReviews = async (req, res) => {
 const getSingleReview = async (req, res) => {
     try {
         res.setHeader("Access-Control-Allow-Origin", "*");
-        if (!mongoose.Types.ObjectId.isValid(req.params.reviewId)) {
+        const { reviewId } = req.params;
+
+        if (!mongoose.Types.ObjectId.isValid(reviewId)) {
             return res.status(400).json({ message: 'Must use a valid review id to get a review.' });
         }
-        
-        const review = await Review.findById(req.params.reviewId);
+
+        const review = await Review.findById(reviewId);
 
         if (!review) {
             return res.status(404).json({ message: 'Review not found' });
@@ -31,6 +33,59 @@ const getSingleReview = async (req, res) => {
     }
 };
 
+<<<<<<< HEAD
+const getReviewsByTitle = async (req, res) => {
+    try {
+        res.setHeader("Access-Control-Allow-Origin", "*");
+        const movieTitle = decodeURIComponent(req.params.title);
+
+        const movie = await Movie.findOne({ 
+            title: { $regex: new RegExp(movieTitle, 'i') }
+        });
+
+        if (!movie) {
+            return res.status(404).json({ message: 'Movie not found' });
+        }
+
+        const reviews = await Review.find({ movie_id: movie._id });
+
+        if (reviews.length === 0) {
+            return res.status(404).json({ 
+                message: 'No reviews found for this movie',
+                movieTitle: movie.title
+            });
+        }
+
+        res.json({
+            movie: movie.title,
+            reviews: reviews
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message || "Some error occurred while getting reviews by movie title." });
+    }
+};
+
+const getReviewsByUserId = async (req, res) => {
+    try {
+        res.setHeader("Access-Control-Allow-Origin", "*");
+        const { userId } = req.params;
+
+        if (!mongoose.Types.ObjectId.isValid(userId)) {
+            return res.status(400).json({ message: 'Must use a valid user id to get reviews.' });
+        }
+
+        const reviews = await Review.find({ user_id: userId });
+
+        if (reviews.length === 0) {
+            return res.status(404).json({ message: 'No reviews found for this user' });
+        }
+
+        res.json(reviews);
+    } catch (error) {
+        res.status(500).json({ message: error.message || "Some error occurred while getting reviews by user ID." });
+    }
+};
+=======
 // const getReviewsByTitle = async (req, res) => {
 //     try {
 //         res.setHeader("Access-Control-Allow-Origin", "*");
@@ -83,6 +138,7 @@ const getSingleReview = async (req, res) => {
 //     }
 // };
 
+>>>>>>> fd93740c4396dcc0a095a290ac7ba3ee53e676c8
 
 const createNewReview = async (req, res) => {
     try {
@@ -101,13 +157,11 @@ const createNewReview = async (req, res) => {
     }
 };
 
-
 const updateReview = async (req, res) => {
     try {
         const { reviewId } = req.params;
         const { movie_id, rating, comment, user_id } = req.body;
 
-        // Validate reviewId
         if (!mongoose.Types.ObjectId.isValid(reviewId)) {
             return res.status(400).json({ message: 'Invalid review ID.' });
         }
@@ -129,18 +183,20 @@ const updateReview = async (req, res) => {
     }
 };
 
-
-
 const deleteReview = async (req, res) => {
     try {
         const { reviewId } = req.params;
+
         if (!mongoose.Types.ObjectId.isValid(reviewId)) {
             return res.status(400).json({ message: 'Must use a valid review id to delete a review.' });
         }
+
         const deletedReview = await Review.findByIdAndDelete(reviewId);
+
         if (!deletedReview) {
             return res.status(404).json({ message: 'Review not found' });
         }
+
         res.status(204).send();
     } catch (error) {
         res.status(500).json({ message: error.message || "Some error occurred while deleting the review." });
