@@ -1,5 +1,6 @@
 // npm install --save-dev jest supertest
 // to run the tests 'npm test'
+// or to run a single test, npm test -- __tests__/review.spec.js
 
 const request = require("supertest");
 const mongoose = require("mongoose");
