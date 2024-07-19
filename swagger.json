@@ -6,73 +6,13 @@
     "version": "1.0.0"
   },
   "host": [
-    "localhost:8080"
+    "rate-a-movie.onrender.com"
   ],
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
-    "/api-docs": {
-      "get": {
-        "description": "",
-        "responses": {
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/": {
-      "get": {
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "post": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "movie_id": {
-                  "example": "any"
-                },
-                "rating": {
-                  "example": "any"
-                },
-                "comment": {
-                  "example": "any"
-                },
-                "user_id": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
     "/users/": {
       "post": {
         "description": "",
@@ -269,6 +209,9 @@
                   "example": "any"
                 },
                 "comment": {
+                  "example": "any"
+                },
+                "user_id": {
                   "example": "any"
                 }
               }
@@ -867,6 +810,9 @@
                   "example": "any"
                 },
                 "comment": {
+                  "example": "any"
+                },
+                "user_id": {
                   "example": "any"
                 }
               }

@@ -101,14 +101,14 @@ const createNewReview = async (req, res) => {
 const updateReview = async (req, res) => {
     try {
         const { reviewId } = req.params;
-        const { movie_id, rating, comment } = req.body;
+        const { movie_id, rating, comment, user_id } = req.body;
 
         // Validate reviewId
         if (!mongoose.Types.ObjectId.isValid(reviewId)) {
             return res.status(400).json({ message: 'Invalid review ID.' });
         }
 
-        const updateObj = { movie_id, rating, comment };
+        const updateObj = { movie_id, rating, comment, user_id };
         const updatedReview = await Review.findByIdAndUpdate(
             reviewId,
             { $set: updateObj },
@@ -124,6 +124,7 @@ const updateReview = async (req, res) => {
         res.status(500).json({ message: error.message || "Some error occurred while updating the review." });
     }
 };
+
 
 
 const deleteReview = async (req, res) => {
