@@ -35,8 +35,8 @@ This API allows users to:
 - **/users**: Manage users.
 
 ## Links
-
-- [Host/render](https://rate-a-movie.onrender.com/api-docs/)
-- [YouTube video](https://www.youtube.com/watch?v=SVBErzek80k)
+- [Authentication/Login Route](https://rate-a-movie.onrender.com/login)
+- [Swagger Route](https://rate-a-movie.onrender.com/api-docs/)
+- [YouTube Video](https://www.youtube.com/watch?v=SVBErzek80k)
 
 
