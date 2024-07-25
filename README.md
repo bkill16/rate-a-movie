@@ -4,7 +4,7 @@ This project was part of a group assignment for CSE 341, where we were asked to 
 
 Our group decided to build a movie review platform that manages the reviews of movies and links reviews to users. We implemented several routes, including actors, movies, reviews, and users.
 
-We used Node.js, MongoDB, and Mongoose to build this project.
+We used Node.js, Express.js, MongoDB, and Mongoose to build this project.
 
 ## Developers
 
@@ -23,6 +23,7 @@ This API allows users to:
 ## Technologies Used
 
 - **Node.js**: A JavaScript runtime built on Chrome's V8 JavaScript engine.
+- **Express.js**: A web back-end web framework for building RESTful APIs with Node.js.
 - **MongoDB**: A NoSQL database for storing data.
 - **Mongoose**: An Object Data Modeling (ODM) library for MongoDB and Node.js.
 
@@ -32,3 +33,10 @@ This API allows users to:
 - **/movies**: Manage movies.
 - **/reviews**: Manage reviews.
 - **/users**: Manage users.
+
+## Links
+
+- [Host/render](https://rate-a-movie.onrender.com/api-docs/)
+- [YouTube video](https://www.youtube.com/watch?v=SVBErzek80k)
+
+
